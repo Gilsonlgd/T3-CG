@@ -1,0 +1,425 @@
+# depslib dependency file v1.0
+1626955631 source:e:\pastas\ufsm copia\5 semestre\cg\p1\trab1gilsongarcia\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1603974868 e:\pastas\ufsm copia\5 semestre\cg\p1\trab1gilsongarcia\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+
+1426372440 e:\pastas\ufsm copia\5 semestre\cg\p1\trab1gilsongarcia\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 e:\pastas\ufsm copia\5 semestre\cg\p1\trab1gilsongarcia\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 e:\pastas\ufsm copia\5 semestre\cg\p1\trab1gilsongarcia\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1589217858 e:\pastas\ufsm copia\5 semestre\cg\p1\trab1gilsongarcia\src\vector2.h
+
+1626955631 source:e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1680984595 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+
+1426372440 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1589217858 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\vector2.h
+
+1682047604 source:e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<list>
+	"gl_canvas2d.h"
+	"Retangulo.h"
+	"Figura.h"
+	"Linha.h"
+	"Botao.h"
+	"ToolBar.h"
+	"Export.h"
+	"Import.h"
+	"constants.h"
+
+1682043946 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\retangulo.h
+	"Figura.h"
+	"constants.h"
+	"Circulo.h"
+	<stdio.h>
+
+1682045094 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\figura.h
+	<vector>
+	<cmath>
+	"BoundingBtn.h"
+
+1680625998 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\bola.h
+	"gl_canvas2d.h"
+
+1682048129 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\botao.h
+	"gl_canvas2d.h"
+	"constants.h"
+
+1682044984 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\constants.h
+
+1682045436 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\toolbar.h
+	"Figura.h"
+	"Retangulo.h"
+	"Circulo.h"
+	"Linha.h"
+	"Botao.h"
+	"ColorPicker.h"
+	<list>
+	<vector>
+	<cmath>
+
+1626955631 source:g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1680984595 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+
+1426372440 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1589217858 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\vector2.h
+
+1682110692 source:g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<list>
+	"gl_canvas2d.h"
+	"Retangulo.h"
+	"Figura.h"
+	"Linha.h"
+	"Botao.h"
+	"ToolBar.h"
+	"Export.h"
+	"Import.h"
+	"constants.h"
+
+1682108208 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\retangulo.h
+	"Figura.h"
+	"constants.h"
+	"Circulo.h"
+	<stdio.h>
+
+1682045094 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\figura.h
+	<vector>
+	<cmath>
+	"BoundingBtn.h"
+
+1680625998 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\bola.h
+	"gl_canvas2d.h"
+
+1682048129 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\botao.h
+	"gl_canvas2d.h"
+	"constants.h"
+
+1682044984 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\constants.h
+
+1682045436 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\toolbar.h
+	"Figura.h"
+	"Retangulo.h"
+	"Circulo.h"
+	"Linha.h"
+	"Botao.h"
+	"ColorPicker.h"
+	<list>
+	<vector>
+	<cmath>
+
+1682048167 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\circulo.h
+	<cmath>
+	"Figura.h"
+	"constants.h"
+
+1682044296 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\linha.h
+	"Figura.h"
+	"constants.h"
+
+1682044946 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\colorpicker.h
+	<iostream>
+	<vector>
+	"Botao.h"
+	"constants.h"
+	<cmath>
+
+1682048167 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\circulo.h
+	<cmath>
+	"Figura.h"
+	"constants.h"
+
+1682044296 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\linha.h
+	"Figura.h"
+	"constants.h"
+
+1682044946 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\colorpicker.h
+	<iostream>
+	<vector>
+	"Botao.h"
+	"constants.h"
+	<cmath>
+
+1682048062 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\boundingbtn.h
+	"gl_canvas2d.h"
+	"constants.h"
+	<cmath>
+
+1682048062 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\boundingbtn.h
+	"gl_canvas2d.h"
+	"constants.h"
+	<cmath>
+
+1682103793 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\export.h
+	"gl_canvas2d.h"
+	"Figura.h"
+	"Circulo.h"
+	<iostream>
+	<fstream>
+	<iterator>
+	<list>
+	<vector>
+	<string>
+
+1682046578 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\export.h
+	"gl_canvas2d.h"
+	"Figura.h"
+	"Circulo.h"
+	<iostream>
+	<fstream>
+	<iterator>
+	<list>
+	<vector>
+	<string>
+
+1682044630 e:\pastas\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\import.h
+	"gl_canvas2d.h"
+	"Figura.h"
+	"Circulo.h"
+	<iostream>
+	<fstream>
+	<iterator>
+	<list>
+	<vector>
+	<string>
+
+1682103746 g:\outros computadores\meu computador\ufsm copia\5 semestre\cg\t1\trab1gilsongarcia\src\import.h
+	"gl_canvas2d.h"
+	"Figura.h"
+	"Circulo.h"
+	<iostream>
+	<fstream>
+	<iterator>
+	<list>
+	<vector>
+	<string>
+
+1626955631 source:e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1680984595 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+
+1426372440 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\include\gl\glut.h
+	"freeglut_std.h"
+
+1437579942 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1426372440 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1589217858 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\vector2.h
+
+1684795065 source:e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<list>
+	"gl_canvas2d.h"
+	"Keyboard.h"
+	"Spaceship.h"
+	"Polygon.h"
+	"Map.h"
+	"Botao.h"
+	"constants.h"
+
+1682108219 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\retangulo.h
+	"Figura.h"
+	"constants.h"
+	"Circulo.h"
+	<stdio.h>
+
+1682045094 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\figura.h
+	<vector>
+	<cmath>
+	"BoundingBtn.h"
+
+1682048062 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\boundingbtn.h
+	"gl_canvas2d.h"
+	"constants.h"
+	<cmath>
+
+1684693654 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\constants.h
+
+1682048167 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\circulo.h
+	<cmath>
+	"Figura.h"
+	"constants.h"
+
+1682044296 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\linha.h
+	"Figura.h"
+	"constants.h"
+
+1682048129 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\botao.h
+	"gl_canvas2d.h"
+	"constants.h"
+
+1682045436 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\toolbar.h
+	"Figura.h"
+	"Retangulo.h"
+	"Circulo.h"
+	"Linha.h"
+	"Botao.h"
+	"ColorPicker.h"
+	<list>
+	<vector>
+	<cmath>
+
+1682044946 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\colorpicker.h
+	<iostream>
+	<vector>
+	"Botao.h"
+	"constants.h"
+	<cmath>
+
+1682103799 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\export.h
+	"gl_canvas2d.h"
+	"Figura.h"
+	"Circulo.h"
+	<iostream>
+	<fstream>
+	<iterator>
+	<list>
+	<vector>
+	<string>
+
+1682103754 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\import.h
+	"gl_canvas2d.h"
+	"Figura.h"
+	"Circulo.h"
+	<iostream>
+	<fstream>
+	<iterator>
+	<list>
+	<vector>
+	<string>
+
+1684700197 source:e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\matrix_utils.cpp
+	"matrix_utils.h"
+
+1684700186 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\matrix_utils.h
+	<vector>
+
+1684785609 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\keyboard.h
+	<list>
+	<algorithm>
+
+1684795065 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\spaceship.h
+	<list>
+	"Polygon.h"
+	"Keyboard.h"
+
+1684781895 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\polygon.h
+	<vector>
+	<cmath>
+	"constants.h"
+	"matrix_utils.h"
+	"gl_canvas2d.h"
+
+1684785596 e:\pastas\ufsm copia\5 semestre\cg\t3\trab3gilsongarcia\src\map.h
+	<vector>
+	<random>
+	"gl_canvas2d.h"
+	"matrix_utils.h"
+
