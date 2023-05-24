@@ -9,7 +9,6 @@
 #include <GL/freeglut_ext.h> //callback da wheel do mouse.
 
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
 #include <list>
@@ -21,7 +20,6 @@
 #include "Spaceship.h"
 #include "Polygon.h"
 #include "Map.h"
-#include "Botao.h"
 #include "FPSControl.h"
 //#include "Export.h"
 //#include "Import.h"
@@ -95,7 +93,8 @@ void keyboard(int key)
    }
 
    kbd->startPressKey(key);
-
+   if (kbd->isPressed(SPACE)) spaceship->shot();
+   
    handleStarshipMovement();
 }
 

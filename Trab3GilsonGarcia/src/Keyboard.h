@@ -15,6 +15,7 @@ using namespace std;
 #define DOWN 203
 #define LEFT 200
 #define RIGHT 202
+#define SPACE 32
 
 
 /*

@@ -115,7 +115,7 @@ public:
         CV::color(0,0,0);
         CV::polygonFill(vx.data(), vy.data(), 4);
 
-        renderStars();
+        //renderStars();
     }
 
     void move(float speed) {

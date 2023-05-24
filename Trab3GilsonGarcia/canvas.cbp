@@ -44,21 +44,19 @@
 			<Add library="../lib/freeglut.lib" />
 		</Linker>
 		<Unit filename="include/GL/glut.h" />
-		<Unit filename="src/Bola.h" />
 		<Unit filename="src/Botao.h" />
+		<Unit filename="src/Bullet.h" />
 		<Unit filename="src/Circulo.h" />
 		<Unit filename="src/ColorPicker.h" />
 		<Unit filename="src/Export.h" />
+		<Unit filename="src/FPSControl.h" />
 		<Unit filename="src/Figura.h" />
 		<Unit filename="src/Import.h" />
 		<Unit filename="src/Keyboard.h" />
 		<Unit filename="src/Map.h" />
 		<Unit filename="src/Polygon.h" />
-		<Unit filename="src/Retangulo.h" />
+		<Unit filename="src/Rectangle.h" />
 		<Unit filename="src/Spaceship.h" />
-		<Unit filename="src/ToolBar.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="src/Vector2.h" />
 		<Unit filename="src/constants.h" />
 		<Unit filename="src/gl_canvas2d.cpp" />

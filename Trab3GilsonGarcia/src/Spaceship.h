@@ -4,6 +4,7 @@
 #include <list>
 #include "Polygon.h"
 #include "Keyboard.h"
+#include "Bullet.h"
 
 using namespace std;
 
@@ -27,6 +28,16 @@ class Spaceship : public Polygon{
     bool isMoving;
     int xDirection;
     int yDirection;
+
+    int ammunitionSize;
+    list<Bullet*> ammunition;
+    list<Bullet*> firedBullets;
+
+    void reloadAmmunition() {
+        for (int i = 0; i < ammunitionSize; i++) {
+            ammunition.push_back(new Bullet(5, 10, 5));
+        }
+    }
 public:
     Spaceship(float x, float y, float height, float base) : Polygon(3){
         vx[0] = x - base/2;
@@ -45,11 +56,13 @@ public:
         maxSpeed = 10;
         minSpeed = 5;
         colorScale = RGBA;
+        ammunitionSize = 5;
+        reloadAmmunition();
     }
 
     virtual void render() override {
         if (isMoving) {
-            translate(xDirection * 10, yDirection * 10);
+            translateBy(xDirection * 10, yDirection * 10);
         }
 
         CV::translate(0, 0);
@@ -57,6 +70,12 @@ public:
         else if (colorScale == INDEX14)  CV::color(indexColor);
 
         CV::polygonFill(vx.data(), vy.data(), nPoints);
+
+        if (firedBullets.size()) {
+            for (auto bullet : firedBullets) {
+                bullet->render();
+            }
+        }
     }
 
     void startMove(int direction) {
@@ -95,6 +114,14 @@ public:
         }
 
         isMoving = false;
+    }
+
+    void shot() {
+        Bullet* bullet = ammunition.front();
+        ammunition.pop_front();
+
+        bullet->fireBullet(getCenterX(), getCenterY());
+        firedBullets.push_back(bullet);
     }
 
     float getHeight() {

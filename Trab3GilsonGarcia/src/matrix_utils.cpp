@@ -20,3 +20,21 @@ vector<vector<float>> multiplyMatrices(const vector<vector<float>>& matrix1, con
 
     return result;
 }
+
+float dotProduct(float x1, float y1, float x2, float y2) {
+    return x1 * x2 + y1 * y2;
+}
+
+void projectPolygon(const vector<float>& vertices, float axisX, float axisY, float& min, float& max) {
+    min = dotProduct(vertices[0], vertices[1], axisX, axisY);
+    max = min;
+
+    for (size_t i = 2; i < vertices.size(); i += 2) {
+        float projection = dotProduct(vertices[i], vertices[i + 1], axisX, axisY);
+        if (projection < min) {
+            min = projection;
+        } else if (projection > max) {
+            max = projection;
+        }
+    }
+}

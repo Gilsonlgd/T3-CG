@@ -24,7 +24,7 @@ protected:
     int indexColor;
     int colorScale;
 
-    virtual void translate(float xIncrease, float yIncrease) {
+    virtual void translateBy(float xIncrease, float yIncrease) {
         // Criando a matriz de translação
         vector<vector<float>> translationMatrix = {
             {1.0f, 0.0f, xIncrease},
@@ -49,7 +49,15 @@ protected:
             vy[i] = transformedPoint[1][0];
         }
     }
-    
+
+    virtual void translateTo(float x, float y) {
+        // Calculating the translation offsets
+        float offsetX = x - vx[0];
+        float offsetY = y - vy[0];
+
+        translateBy(offsetX, offsetY);
+    }
+       
 public:
     Polygon(int nPoints) {
         r = 1;
@@ -142,7 +150,7 @@ public:
     }
 
     // Algorimo Ray Casting de detecção de colisão.
-    virtual bool hasCollided(int x, int y) {
+    virtual bool hasPointCollided(int x, int y) {
         int n = nPoints;
         int count = 0;
 
@@ -157,6 +165,41 @@ public:
             }    
         }
         return count % 2 == 1;
+    }
+
+    // Algoritmo SAT de detecção de colisão
+    bool hasPolygonCollided(vector<float>& polygon1, vector<float>& polygon2) {
+        size_t n1 = polygon1.size() / 2;
+        size_t n2 = polygon2.size() / 2;
+
+        for (size_t i = 0; i < n1 + n2; i++) {
+            float axisX, axisY;
+            if (i < n1) {
+                size_t j = (i + 1) % n1;
+                axisX = polygon1[2 * j + 1] - polygon1[2 * i + 1];
+                axisY = polygon1[2 * i] - polygon1[2 * j];
+            } else {
+                size_t j = (i + 1 - n1) % n2;
+                axisX = polygon2[2 * j + 1] - polygon2[2 * i + 1];
+                axisY = polygon2[2 * i] - polygon2[2 * j];
+            }
+
+            // Normalização
+            float axisLength = sqrt(axisX * axisX + axisY * axisY);
+            axisX /= axisLength;
+            axisY /= axisLength;
+
+            // Projeção dos polígonos
+            float min1, max1, min2, max2;
+            projectPolygon(polygon1, axisX, axisY, min1, max1);
+            projectPolygon(polygon2, axisX, axisY, min2, max2);
+
+            // Checka se houve sobreposição
+            if (max1 < min2 || max2 < min1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     virtual float getCenterX() {
