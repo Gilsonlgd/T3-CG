@@ -11,7 +11,9 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include <list>
+#include <chrono>
 
 #include "gl_canvas2d.h"
 
@@ -20,6 +22,7 @@
 #include "Polygon.h"
 #include "Map.h"
 #include "Botao.h"
+#include "FPSControl.h"
 //#include "Export.h"
 //#include "Import.h"
 
@@ -30,6 +33,7 @@ using namespace std;
 Keyboard *kbd = NULL;
 Spaceship *spaceship = NULL;
 Map *map = NULL;
+FPSControl* fpsControl = NULL;
 //Export *exportData = NULL;
 //Import *importData = NULL;
 
@@ -70,6 +74,9 @@ void render()
 
    map->render();
    spaceship->render();
+
+   fpsControl->limitRefreshRate();
+   printf("fps: %d\n", fpsControl->getActualFrameRate());
 }
 
 void handleStarshipMovement() {
@@ -129,8 +136,9 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship(screenWidth / 2, screenHeight - 100, 50, 100);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100);
    map = new Map(screenWidth, screenHeight, 2);
+   fpsControl = new FPSControl(60, chrono::steady_clock::now());
 
    CV::init(&screenWidth, &screenHeight, "");
    CV::run();

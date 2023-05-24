@@ -423,3 +423,91 @@
 	"gl_canvas2d.h"
 	"matrix_utils.h"
 
+1684795212 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\gl_canvas2d.cpp
+	"gl_canvas2d.h"
+	<GL/glut.h>
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\gl_canvas2d.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	"Vector2.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\include\gl\glut.h
+	"freeglut_std.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\vector2.h
+
+1684795212 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\matrix_utils.cpp
+	"matrix_utils.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\matrix_utils.h
+	<vector>
+
+1684891311 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
+	<GL/glut.h>
+	<GL/freeglut_ext.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<list>
+	<chrono>
+	"gl_canvas2d.h"
+	"Keyboard.h"
+	"Spaceship.h"
+	"Polygon.h"
+	"Map.h"
+	"Botao.h"
+	"FPSControl.h"
+	"constants.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\keyboard.h
+	<list>
+	<algorithm>
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\spaceship.h
+	<list>
+	"Polygon.h"
+	"Keyboard.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\polygon.h
+	<vector>
+	<cmath>
+	"constants.h"
+	"matrix_utils.h"
+	"gl_canvas2d.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\constants.h
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
+	<vector>
+	<random>
+	"gl_canvas2d.h"
+	"matrix_utils.h"
+
+1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\botao.h
+	"gl_canvas2d.h"
+	"constants.h"
+
+1684891354 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\fpscontrol.h
+	<chrono>
+	<thread>
+
