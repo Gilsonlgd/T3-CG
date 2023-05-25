@@ -13,6 +13,7 @@
 #include <iostream>
 #include <list>
 #include <chrono>
+#include <random>
 
 #include "gl_canvas2d.h"
 
@@ -44,6 +45,45 @@ bool isResizing = false;      // estah redimensionando uma figura? só pode uma 
 bool isCTRLdown = false;      // estah segurando o ctrl?
 bool isSHIFTdown = false;     // estah segurando o shift?
 
+vector<float> controlPointsX;
+vector<float> controlPointsY;
+
+vector<float> bezierX;
+vector<float> bezierY;
+
+
+void drawControlBounds() {
+   for ( int i = 0; i < controlPointsX.size() - 1; i++) {
+      CV::translate(0,0);
+      CV::color(3);
+      CV::line(controlPointsX[i], controlPointsY[i], controlPointsX[i+1], controlPointsY[i+1]);
+   }
+}
+
+void generateRandom(vector<float> *vect, int n, int minVal, int maxVal) {
+   random_device rd;
+   mt19937 rng(rd());
+   uniform_int_distribution<int> dist(minVal, maxVal);
+
+   for (int i = 0; i < n; i++) {
+      vect->push_back((float)dist(rng));
+   }
+}
+
+void generateBezier(vector<float> points, vector<float> *bezier, float increment) {
+   for ( float t = 0; t < 1; t += increment) {
+      float value = points[0]*(1 - t)*(1 - t) + points[1]*(2*t*(1-t)) + points[2]*t*t;
+      bezier->push_back(value);
+   }
+}
+
+void renderBezier() {
+   for (int i = 0; i < bezierX.size() - 1; i++) {
+      CV::translate(0,0);
+      CV::color(1);
+      CV::line(bezierX[i], bezierY[i], bezierX[i+1], bezierY[i+1]);
+   }
+}
 
 bool isMouseInsideDrawBounds(float x, float y) {
    if (x > 0 && x < screenWidth) {
@@ -74,7 +114,9 @@ void render()
    spaceship->render();
 
    fpsControl->limitRefreshRate();
-   printf("fps: %d\n", fpsControl->getActualFrameRate());
+   renderBezier();
+   drawControlBounds();
+   //printf("fps: %d\n", fpsControl->getActualFrameRate());
 }
 
 void handleStarshipMovement() {
@@ -138,6 +180,17 @@ int main(void)
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100);
    map = new Map(screenWidth, screenHeight, 2);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
+
+   controlPointsX.push_back(200);
+   controlPointsX.push_back(600);
+   controlPointsX.push_back(100);
+
+   controlPointsY.push_back(200);
+   generateRandom(&controlPointsY, 1, 100, 500);
+   controlPointsY.push_back(600);
+
+   generateBezier(controlPointsX, &bezierX, 0.01);
+   generateBezier(controlPointsY, &bezierY, 0.01);
 
    CV::init(&screenWidth, &screenHeight, "");
    CV::run();
