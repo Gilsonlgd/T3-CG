@@ -35,7 +35,7 @@ class Spaceship : public Polygon{
 
     void reloadAmmunition() {
         for (int i = 0; i < ammunitionSize; i++) {
-            ammunition.push_back(new Bullet(5, 10, 5));
+            ammunition.push_back(new Bullet(5, 10, 10));
         }
     }
 public:
@@ -56,11 +56,17 @@ public:
         maxSpeed = 10;
         minSpeed = 5;
         colorScale = RGBA;
-        ammunitionSize = 5;
+        ammunitionSize = 90;
         reloadAmmunition();
     }
 
     virtual void render() override {
+        if (firedBullets.size()) {
+            for (auto bullet : firedBullets) {
+                bullet->render();
+            }
+        }
+
         if (isMoving) {
             translateBy(xDirection * 10, yDirection * 10);
         }
@@ -71,11 +77,6 @@ public:
 
         CV::polygonFill(vx.data(), vy.data(), nPoints);
 
-        if (firedBullets.size()) {
-            for (auto bullet : firedBullets) {
-                bullet->render();
-            }
-        }
     }
 
     void startMove(int direction) {
@@ -117,11 +118,15 @@ public:
     }
 
     void shot() {
-        Bullet* bullet = ammunition.front();
-        ammunition.pop_front();
+        if (ammunition.size()) {
+            Bullet* bullet = ammunition.front();
+            ammunition.pop_front();
 
-        bullet->fireBullet(getCenterX(), getCenterY());
-        firedBullets.push_back(bullet);
+            bullet->fireBullet(vx[1], vy[1]);
+            firedBullets.push_back(bullet);
+        } else {
+            reloadAmmunition();
+        }
     }
 
     float getHeight() {

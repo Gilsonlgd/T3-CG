@@ -43,8 +43,8 @@ public:
 
     Rectangle(float x, float y) : Polygon(4) {
         ID = RECT_ID;
-        width = 40;
-        height = 40;
+        width = 5;
+        height = 10;
         vx[0] = x;
         vy[0] = y;
         attPointsCoord();

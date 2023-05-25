@@ -14,11 +14,11 @@ using namespace std;
 class Map {
     vector<float> vx, vy;
 
-    vector<float> curStarsX;
-    vector<float> curStarsY;
+    vector<int> curStarsX;
+    vector<int> curStarsY;
 
-    vector<float> nextStarsX;
-    vector<float> nextStarsY;    
+    vector<int> nextStarsX;
+    vector<int> nextStarsY;
 
     float baseWidth;
 
@@ -73,18 +73,18 @@ class Map {
         vy[3] = baseHeight;
     }
 
-    void seedStars(vector<float> *starsX, vector<float> *starsY) {
+    void seedStars(vector<int> *starsX, vector<int> *starsY) {
         starsX->clear();
         starsY->clear();
 
         random_device rd;
         mt19937 rng(rd());
-        uniform_int_distribution<int> distX(0, baseWidth);
-        uniform_int_distribution<int> distY(-baseHeight * ( segmentsPerTime-1), segmentSize);
+        uniform_int_distribution<int> distX(0, (int)baseWidth);
+        uniform_int_distribution<int> distY((int)(-baseHeight * ( segmentsPerTime-1)), (int)segmentSize);
 
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
-            starsX->push_back(distX(rng));
-            starsY->push_back(distY(rng));
+            starsX->push_back( distX(rng));
+            starsY->push_back( distY(rng));
         }
     }
 
@@ -94,7 +94,7 @@ class Map {
             CV::color(1,1,1);
             float sx = curStarsX[i];
             float sy = curStarsY[i];
-            CV::rectFill(sx, sy, sx + STAR_SIZE, sy + STAR_SIZE);         
+            CV::rectFill(sx, sy, sx + STAR_SIZE, sy + STAR_SIZE);
         }
     }
 
@@ -108,7 +108,7 @@ public:
         currentSegment = 0;
         initiateCoordinates();
         seedStars(&curStarsX, &curStarsY);
-    } 
+    }
 
     void render() {
         CV::translate(0, 0);
