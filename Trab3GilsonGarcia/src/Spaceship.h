@@ -56,6 +56,9 @@ public:
         maxSpeed = 10;
         minSpeed = 5;
         colorScale = RGBA;
+        isMoving = false;
+        xDirection = 0;
+        yDirection = 0;
         ammunitionSize = 90;
         reloadAmmunition();
     }

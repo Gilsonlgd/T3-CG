@@ -14,11 +14,11 @@ using namespace std;
 class Map {
     vector<float> vx, vy;
 
-    vector<int> curStarsX;
-    vector<int> curStarsY;
+    vector<float> curStarsX;
+    vector<float> curStarsY;
 
-    vector<int> nextStarsX;
-    vector<int> nextStarsY;
+    vector<float> nextStarsX;
+    vector<float> nextStarsY;
 
     float baseWidth;
 
@@ -73,7 +73,7 @@ class Map {
         vy[3] = baseHeight;
     }
 
-    void seedStars(vector<int> *starsX, vector<int> *starsY) {
+    void seedStars(vector<float> *starsX, vector<float> *starsY) {
         starsX->clear();
         starsY->clear();
 
@@ -83,8 +83,8 @@ class Map {
         uniform_int_distribution<int> distY((int)(-baseHeight * ( segmentsPerTime-1)), (int)segmentSize);
 
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
-            starsX->push_back( distX(rng));
-            starsY->push_back( distY(rng));
+            starsX->push_back( (float)distX(rng) );
+            starsY->push_back( (float)distY(rng) );
         }
     }
 
@@ -115,7 +115,7 @@ public:
         CV::color(0,0,0);
         CV::polygonFill(vx.data(), vy.data(), 4);
 
-        //renderStars();
+        renderStars();
     }
 
     void move(float speed) {
