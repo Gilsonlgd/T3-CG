@@ -1,5 +1,5 @@
-#ifndef MATRIX_UTILS_H
-#define MATRIX_UTILS_H
+#ifndef MATH_UTILS_H
+#define MATH_UTILS_H
 
 #include <vector>
 
@@ -11,4 +11,4 @@ float dotProduct(float x1, float y1, float x2, float y2);
 
 void projectPolygon(const vector<float>& vertices, float axisX, float axisY, float& min, float& max);
 
-#endif  // MATRIX_UTILS_H
+#endif  // MATH_UTILS_H

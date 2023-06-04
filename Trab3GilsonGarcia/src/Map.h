@@ -4,7 +4,7 @@
 #include <vector>
 #include <random>
 #include "gl_canvas2d.h"
-#include "matrix_utils.h"
+#include "math_utils.h"
 #include <ctime>
 
 #define STAR_SIZE 2

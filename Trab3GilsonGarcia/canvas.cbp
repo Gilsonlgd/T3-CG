@@ -62,8 +62,9 @@
 		<Unit filename="src/gl_canvas2d.cpp" />
 		<Unit filename="src/gl_canvas2d.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/math_utils.cpp" />
+		<Unit filename="src/math_utils.h" />
 		<Unit filename="src/matrix_utils.cpp" />
-		<Unit filename="src/matrix_utils.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

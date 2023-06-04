@@ -116,16 +116,16 @@
 	"Keyboard.h"
 	"Bullet.h"
 
-1684896551 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\polygon.h
+1685893889 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\polygon.h
 	<vector>
 	<cmath>
 	"constants.h"
-	"matrix_utils.h"
+	"math_utils"
 	"gl_canvas2d.h"
 
 1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\constants.h
 
-1684896551 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\matrix_utils.h
+1684896551 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.h
 	<vector>
 
 1684898969 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\bullet.h
@@ -135,19 +135,19 @@
 	"Polygon.h"
 	"constants.h"
 
-1685889534 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
+1685893860 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
 	<vector>
 	<random>
 	"gl_canvas2d.h"
-	"matrix_utils.h"
+	"math_utils"
 	<ctime>
 
 1684891354 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\fpscontrol.h
 	<chrono>
 	<thread>
 
-1684896551 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\matrix_utils.cpp
-	"matrix_utils.h"
+1684896551 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.cpp
+	"math_utils.h"
 
 1684990956 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\gl_canvas2d.cpp
 	"gl_canvas2d.h"
@@ -211,12 +211,12 @@
 	<vector>
 	<cmath>
 	"constants.h"
-	"matrix_utils.h"
+	"math_utils.h"
 	"gl_canvas2d.h"
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\constants.h
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\matrix_utils.h
+1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
 	<vector>
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
@@ -230,12 +230,18 @@
 	<vector>
 	<random>
 	"gl_canvas2d.h"
-	"matrix_utils.h"
+	"math_utils.h"
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
 	<chrono>
 	<thread>
 
-1684990956 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\matrix_utils.cpp
-	"matrix_utils.h"
+1684990956 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
+	"math_utils.h"
+
+1685893883 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.h
+	<vector>
+
+1685893869 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.cpp
+	"math_utils.h"
 

@@ -4,7 +4,7 @@
 #include <vector>
 #include <cmath>
 #include "constants.h"
-#include "matrix_utils.h"
+#include "math_utils.h"
 #include "gl_canvas2d.h"
 
 using namespace std;
