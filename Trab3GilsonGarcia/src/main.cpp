@@ -63,6 +63,59 @@ void handleMapMovement() {
    map->move(0.5);
 }
 
+/*
+float radIni = 0;
+
+void drawWireframe(float r, float interval) {
+   float radInterval = interval * PI / 180;
+   float rad = 0;
+   CV::color(0, 0, 0);
+
+   for (rad = 0; rad < 2*PI; rad += 2*radInterval) {
+      float x1 = r * cos(rad + radIni);
+      float y1 = r * sin(rad + radIni );
+
+      float x2 = r * cos(rad + radInterval + radIni);
+      float y2 = r * sin(rad + radInterval + radIni);
+
+      CV::line(x1, y1, x2, y2);
+
+      float ri = r - 10; 
+      for (float i = rad + radInterval; i < rad + 2*radInterval; i+= 0.0001) {
+         float xi1 = ri * cos(i + radIni);
+         float yi1 = ri * sin(i + radIni);
+
+         float xi2 = ri * cos(i + 0.001 + radIni);
+         float yi2 = ri * sin(i + 0.001 + radIni);
+
+         CV::line(xi1, yi1, xi2, yi2);
+      }
+
+      CV::line(x1, y1, ri * cos(rad + radIni), ri * sin(rad + radIni));
+      CV::line(x2, y2, ri * cos(rad + radInterval + radIni), ri * sin(rad + radInterval+ radIni));
+   }
+
+   radIni += 0.01;
+}
+
+*/
+/*
+float radIni = 0;
+
+void drawSpin() {
+   CV::color(0, 0, 0);
+   CV::translate(200,200);
+   float r = 0;
+
+   for (float ang = 0; ang < 5*PI; ang+=0.001) {
+      float x = r * cos(ang + radIni);
+      float y = r * sin(ang + radIni);
+      CV::point(x, y);
+      r+=0.01;
+   }
+   radIni += 0.001;
+} 
+*/
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
 //Todos os comandos para desenho na canvas devem ser chamados dentro da render().
 //Deve-se manter essa fun��o com poucas linhas de codigo.
@@ -75,6 +128,11 @@ void render()
 
    fpsControl->limitRefreshRate();
    printf("fps: %d\n", fpsControl->getActualFrameRate());
+
+   //drawSpin();
+   //CV::translate(200, 200);
+   //drawWireframe(100, 20);
+
 }
 
 void handleStarshipMovement() {
