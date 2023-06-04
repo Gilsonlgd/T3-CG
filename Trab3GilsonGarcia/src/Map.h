@@ -5,9 +5,10 @@
 #include <random>
 #include "gl_canvas2d.h"
 #include "matrix_utils.h"
+#include <ctime>
 
 #define STAR_SIZE 2
-#define STARS_PER_SEGMENT 500
+#define STARS_PER_SEGMENT 250
 
 using namespace std;
 
@@ -17,42 +18,8 @@ class Map {
     vector<float> curStarsX;
     vector<float> curStarsY;
 
-    vector<float> nextStarsX;
-    vector<float> nextStarsY;
-
     float baseWidth;
-
     float baseHeight;
-    float segmentSize;
-
-    int currentSegment;
-    int segmentsPerTime;
-
-    void translate(float xIncrease, float yIncrease) {
-        // Criando a matriz de translação
-        vector<vector<float>> translationMatrix = {
-            {1.0f, 0.0f, xIncrease},
-            {0.0f, 1.0f, yIncrease},
-            {0.0f, 0.0f, 1.0f}
-        };
-
-        // Aplicando a translação a cada ponto do polígono
-        for (int i = 0; i < 4; ++i) {
-            // Adicionando as coordenadas do ponto como uma coluna
-            vector<vector<float>> pointMatrix = {
-                {vx[i]},
-                {vy[i]},
-                {1.0f}
-            };
-
-            // Multiplicando a matriz de translação pelo ponto
-            vector<vector<float>> transformedPoint = multiplyMatrices(translationMatrix, pointMatrix);
-
-            // Atualizando as coordenadas do ponto no polígono
-            vx[i] = transformedPoint[0][0];
-            vy[i] = transformedPoint[1][0];
-        }
-    }
 
     void initiateCoordinates() {
         for (int i = 0; i < 4; i++) {
@@ -80,12 +47,22 @@ class Map {
         random_device rd;
         mt19937 rng(rd());
         uniform_int_distribution<int> distX(0, (int)baseWidth);
-        uniform_int_distribution<int> distY((int)(-baseHeight * ( segmentsPerTime-1)), (int)segmentSize);
+        uniform_int_distribution<int> distY(0, (int)baseHeight);
 
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
             starsX->push_back( (float)distX(rng) );
             starsY->push_back( (float)distY(rng) );
         }
+    }
+
+    void reseedStar(float* x, float* y) {
+        float minHeight = -(baseHeight / 4.0);
+        static std::mt19937 rng1(time(nullptr));
+        std::uniform_real_distribution<float> distX(0.0f, (float)baseWidth);
+        std::uniform_real_distribution<float> distY(minHeight, 0.0f);
+
+        *x = distX(rng1);
+        *y = distY(rng1);
     }
 
     void renderStars() {
@@ -99,13 +76,10 @@ class Map {
     }
 
 public:
-    Map(float windowWidth, float windowHeight, int segmentsPerTime) {
+    Map(float windowWidth, float windowHeight) {
         this->baseWidth = windowWidth;
         this->baseHeight = windowHeight;
-        this->segmentsPerTime = segmentsPerTime;
-        this->segmentSize = windowHeight * segmentsPerTime;
 
-        currentSegment = 0;
         initiateCoordinates();
         seedStars(&curStarsX, &curStarsY);
     }
@@ -121,6 +95,10 @@ public:
     void move(float speed) {
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
             curStarsY[i] += speed;
+
+            if (curStarsY[i] > baseHeight) {
+                reseedStar(&curStarsX[i], &curStarsY[i]);
+            }
         }
     }
 };

@@ -89,7 +89,7 @@
 
 1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\vector2.h
 
-1684982976 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
+1685889046 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -135,11 +135,12 @@
 	"Polygon.h"
 	"constants.h"
 
-1684979837 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
+1685889534 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
 	<vector>
 	<random>
 	"gl_canvas2d.h"
 	"matrix_utils.h"
+	<ctime>
 
 1684891354 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\fpscontrol.h
 	<chrono>

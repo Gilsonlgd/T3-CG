@@ -236,7 +236,7 @@ int main(void)
 {
    kbd = new Keyboard();
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100);
-   map = new Map(screenWidth, screenHeight, 2);
+   map = new Map(screenWidth, screenHeight);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 
    controlPointsX.push_back(200);
