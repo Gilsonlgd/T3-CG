@@ -64,7 +64,6 @@
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/math_utils.cpp" />
 		<Unit filename="src/math_utils.h" />
-		<Unit filename="src/matrix_utils.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

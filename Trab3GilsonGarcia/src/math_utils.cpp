@@ -38,3 +38,7 @@ void projectPolygon(const vector<float>& vertices, float axisX, float axisY, flo
         }
     }
 }
+
+float evaluateBSpline(float p1, float p2, float p3, float p4, float t) {
+    return (pow( (1 - t), 3.0) / 6) * p1 + ((3 * pow(t, 3.0) - 6 * pow(t, 2.0) + 4) /6) * p2 + ((-3 * pow(t, 3.0) + 3 * pow(t,2.0) + 3 * t + 1) / 6) * p3 + ( pow(t, 3.0 ) / 6 ) * p4; 
+}

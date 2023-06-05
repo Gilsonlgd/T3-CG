@@ -3,12 +3,15 @@
 
 #include <vector>
 #include <random>
+#include <algorithm>
 #include "gl_canvas2d.h"
 #include "math_utils.h"
 #include <ctime>
 
 #define STAR_SIZE 2
 #define STARS_PER_SEGMENT 250
+#define BSPLINE_X_RANGE 200
+#define BSPLINE_N_CONTROL_POINTS 10
 
 using namespace std;
 
@@ -18,8 +21,18 @@ class Map {
     vector<float> curStarsX;
     vector<float> curStarsY;
 
+    vector<float> controlPointsX;
+    vector<float> controlPointsY;
+
+    vector<float> bSplineLeftX;
+    vector<float> bSplineRightX;
+
+    vector<float> bSplineY;
+
     float baseWidth;
     float baseHeight;
+
+
 
     void initiateCoordinates() {
         for (int i = 0; i < 4; i++) {
@@ -58,11 +71,33 @@ class Map {
     void reseedStar(float* x, float* y) {
         float minHeight = -(baseHeight / 4.0);
         static std::mt19937 rng1(time(nullptr));
-        std::uniform_real_distribution<float> distX(0.0f, (float)baseWidth);
-        std::uniform_real_distribution<float> distY(minHeight, 0.0f);
+        uniform_real_distribution<float> distX(0.0f, (float)baseWidth);
+        uniform_real_distribution<float> distY(minHeight, 0.0f);
 
         *x = distX(rng1);
         *y = distY(rng1);
+    }
+
+    void seedControlPoints() {
+        controlPointsY.push_back(-100);
+        controlPointsY.push_back(baseHeight + 100);
+
+        random_device rd;
+        mt19937 rng(rd());
+        uniform_real_distribution<float> distX(0.0f, BSPLINE_X_RANGE);
+        uniform_real_distribution<float> distY(0.0f, (int)baseHeight);
+
+        for (int i = 0; i < BSPLINE_N_CONTROL_POINTS; i++) {
+            float x = distX(rng);
+            float y = distY(rng);
+
+            bSplineLeftX.push_back(x);
+            bSplineRightX.push_back(baseWidth - x);
+            
+            bSplineY.push_back(y);
+        }
+
+        sort(bSplineY.begin(), bSplineY.end());
     }
 
     void renderStars() {
@@ -75,6 +110,23 @@ class Map {
         }
     }
 
+    void renderBSpline() {
+        for (int i = 0; i < BSPLINE_N_CONTROL_POINTS - 3; i++) {
+            for (float t = 0; t < 1; t += 0.001) {
+                float xLeft = evaluateBSpline(bSplineLeftX[i], bSplineLeftX[i + 1], bSplineLeftX[i + 2], bSplineLeftX[i + 3], t);
+                float xRight = evaluateBSpline(bSplineRightX[i], bSplineRightX[i + 1], bSplineRightX[i + 2], bSplineRightX[i + 3], t);
+
+                float y = evaluateBSpline(bSplineY[i], bSplineY[i + 1], bSplineY[i + 2], bSplineY[i + 3], t);
+
+                CV::translate(0, 0);
+                CV::color(1,1,1);
+                CV::point(xLeft, y);
+                CV::point(xRight, y);
+            }
+        }
+        
+    }
+
 public:
     Map(float windowWidth, float windowHeight) {
         this->baseWidth = windowWidth;
@@ -82,6 +134,7 @@ public:
 
         initiateCoordinates();
         seedStars(&curStarsX, &curStarsY);
+        seedControlPoints();
     }
 
     void render() {
@@ -90,15 +143,25 @@ public:
         CV::polygonFill(vx.data(), vy.data(), 4);
 
         renderStars();
+        renderBSpline();
     }
 
     void move(float speed) {
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
             curStarsY[i] += speed;
-
             if (curStarsY[i] > baseHeight) {
                 reseedStar(&curStarsX[i], &curStarsY[i]);
             }
+        }
+
+        for (int i = 0; i < BSPLINE_N_CONTROL_POINTS; i++) {
+            bSplineY[i] += speed;
+        }
+
+        float *prevLastY = &bSplineY[BSPLINE_N_CONTROL_POINTS - 2];
+        if (*prevLastY > baseHeight) {
+            bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = -100;
+            sort(bSplineY.begin(), bSplineY.end());
         }
     }
 };
