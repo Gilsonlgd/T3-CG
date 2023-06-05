@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <math.h>
+#include <random>
+#include <ctime>
 struct Point {
     float x;
     float y;
@@ -17,5 +19,7 @@ float dotProduct(float x1, float y1, float x2, float y2);
 void projectPolygon(const vector<float>& vertices, float axisX, float axisY, float& min, float& max);
 
 float evaluateBSpline(float p1, float p2, float p3, float p4, float t);
+
+float randomFloat(float min, float max);
 
 #endif  // MATH_UTILS_H

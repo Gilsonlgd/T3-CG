@@ -1,6 +1,7 @@
 #ifndef MAP_H_INCLUDED
 #define MAP_H_INCLUDED
 
+#include <stdio.h>
 #include <vector>
 #include <random>
 #include <algorithm>
@@ -9,9 +10,9 @@
 #include <ctime>
 
 #define STAR_SIZE 2
-#define STARS_PER_SEGMENT 250
-#define BSPLINE_X_RANGE 200
-#define BSPLINE_N_CONTROL_POINTS 10
+#define STARS_PER_SEGMENT 150
+#define BSPLINE_X_RANGE 400
+#define BSPLINE_N_CONTROL_POINTS 20
 
 using namespace std;
 
@@ -79,9 +80,6 @@ class Map {
     }
 
     void seedControlPoints() {
-        controlPointsY.push_back(-100);
-        controlPointsY.push_back(baseHeight + 100);
-
         random_device rd;
         mt19937 rng(rd());
         uniform_real_distribution<float> distX(0.0f, BSPLINE_X_RANGE);
@@ -89,12 +87,15 @@ class Map {
 
         for (int i = 0; i < BSPLINE_N_CONTROL_POINTS; i++) {
             float x = distX(rng);
-            float y = distY(rng);
 
             bSplineLeftX.push_back(x);
-            bSplineRightX.push_back(baseWidth - x);
-            
-            bSplineY.push_back(y);
+            bSplineRightX.push_back(baseWidth - x);            
+        }
+
+        float initialCordinate = -1000;
+        for (int i = 0; i < BSPLINE_N_CONTROL_POINTS; i++) {
+            bSplineY.push_back(initialCordinate);
+            initialCordinate += 100;
         }
 
         sort(bSplineY.begin(), bSplineY.end());
@@ -111,7 +112,7 @@ class Map {
     }
 
     void renderBSpline() {
-        for (int i = 0; i < BSPLINE_N_CONTROL_POINTS - 3; i++) {
+        for (int i = 0; i < bSplineY.size() - 3; i++) {
             for (float t = 0; t < 1; t += 0.001) {
                 float xLeft = evaluateBSpline(bSplineLeftX[i], bSplineLeftX[i + 1], bSplineLeftX[i + 2], bSplineLeftX[i + 3], t);
                 float xRight = evaluateBSpline(bSplineRightX[i], bSplineRightX[i + 1], bSplineRightX[i + 2], bSplineRightX[i + 3], t);
@@ -123,8 +124,7 @@ class Map {
                 CV::point(xLeft, y);
                 CV::point(xRight, y);
             }
-        }
-        
+        }  
     }
 
 public:
@@ -158,10 +158,19 @@ public:
             bSplineY[i] += speed;
         }
 
-        float *prevLastY = &bSplineY[BSPLINE_N_CONTROL_POINTS - 2];
-        if (*prevLastY > baseHeight) {
-            bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = -100;
+        float *prevLastY = &bSplineY[bSplineY.size() - 5];
+        if (*prevLastY > baseHeight + 200) {
+            bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = -1000;
             sort(bSplineY.begin(), bSplineY.end());
+
+            float xLeft = randomFloat(0, BSPLINE_X_RANGE);
+            float xRight = baseWidth - xLeft;
+
+            bSplineLeftX.pop_back();
+            bSplineRightX.pop_back();
+
+            bSplineLeftX.insert(bSplineLeftX.begin(), xLeft);
+            bSplineRightX.insert(bSplineRightX.begin(), xRight);
         }
     }
 };

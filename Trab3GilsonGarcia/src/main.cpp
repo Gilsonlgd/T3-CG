@@ -60,31 +60,6 @@ void drawControlBounds() {
    }
 }
 
-void generateRandom(vector<float> *vect, int n, int minVal, int maxVal) {
-   random_device rd;
-   mt19937 rng(rd());
-   uniform_int_distribution<int> dist(minVal, maxVal);
-
-   for (int i = 0; i < n; i++) {
-      vect->push_back((float)dist(rng));
-   }
-}
-
-void generateBezier(vector<float> points, vector<float> *bezier, float increment) {
-   for ( float t = 0; t < 1; t += increment) {
-      float value = points[0]*(1 - t)*(1 - t) + points[1]*(2*t*(1-t)) + points[2]*t*t;
-      bezier->push_back(value);
-   }
-}
-
-void renderBezier() {
-   for (int i = 0; i < bezierX.size() - 1; i++) {
-      CV::translate(0,0);
-      CV::color(1);
-      CV::line(bezierX[i], bezierY[i], bezierX[i+1], bezierY[i+1]);
-   }
-}
-
 bool isMouseInsideDrawBounds(float x, float y) {
    if (x > 0 && x < screenWidth) {
       if (y > 0 && y < screenHeight) {
@@ -103,59 +78,7 @@ void handleMapMovement() {
    map->move(0.5);
 }
 
-/*
-float radIni = 0;
 
-void drawWireframe(float r, float interval) {
-   float radInterval = interval * PI / 180;
-   float rad = 0;
-   CV::color(0, 0, 0);
-
-   for (rad = 0; rad < 2*PI; rad += 2*radInterval) {
-      float x1 = r * cos(rad + radIni);
-      float y1 = r * sin(rad + radIni );
-
-      float x2 = r * cos(rad + radInterval + radIni);
-      float y2 = r * sin(rad + radInterval + radIni);
-
-      CV::line(x1, y1, x2, y2);
-
-      float ri = r - 10; 
-      for (float i = rad + radInterval; i < rad + 2*radInterval; i+= 0.0001) {
-         float xi1 = ri * cos(i + radIni);
-         float yi1 = ri * sin(i + radIni);
-
-         float xi2 = ri * cos(i + 0.001 + radIni);
-         float yi2 = ri * sin(i + 0.001 + radIni);
-
-         CV::line(xi1, yi1, xi2, yi2);
-      }
-
-      CV::line(x1, y1, ri * cos(rad + radIni), ri * sin(rad + radIni));
-      CV::line(x2, y2, ri * cos(rad + radInterval + radIni), ri * sin(rad + radInterval+ radIni));
-   }
-
-   radIni += 0.01;
-}
-
-*/
-/*
-float radIni = 0;
-
-void drawSpin() {
-   CV::color(0, 0, 0);
-   CV::translate(200,200);
-   float r = 0;
-
-   for (float ang = 0; ang < 5*PI; ang+=0.001) {
-      float x = r * cos(ang + radIni);
-      float y = r * sin(ang + radIni);
-      CV::point(x, y);
-      r+=0.01;
-   }
-   radIni += 0.001;
-} 
-*/
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
 //Todos os comandos para desenho na canvas devem ser chamados dentro da render().
 //Deve-se manter essa fun��o com poucas linhas de codigo.
@@ -167,14 +90,6 @@ void render()
    spaceship->render();
 
    fpsControl->limitRefreshRate();
-   renderBezier();
-   drawControlBounds();
-   //printf("fps: %d\n", fpsControl->getActualFrameRate());
-
-   //drawSpin();
-   //CV::translate(200, 200);
-   //drawWireframe(100, 20);
-
 }
 
 void handleStarshipMovement() {
@@ -238,17 +153,6 @@ int main(void)
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100);
    map = new Map(screenWidth, screenHeight);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
-
-   controlPointsX.push_back(200);
-   controlPointsX.push_back(600);
-   controlPointsX.push_back(100);
-
-   controlPointsY.push_back(200);
-   generateRandom(&controlPointsY, 1, 100, 500);
-   controlPointsY.push_back(600);
-
-   generateBezier(controlPointsX, &bezierX, 0.01);
-   generateBezier(controlPointsY, &bezierY, 0.01);
 
    CV::init(&screenWidth, &screenHeight, "");
    CV::run();

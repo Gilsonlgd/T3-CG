@@ -89,7 +89,7 @@
 
 1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\vector2.h
 
-1685889046 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
+1685976567 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -125,9 +125,11 @@
 
 1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\constants.h
 
-1685894777 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.h
+1685976169 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.h
 	<vector>
 	<math.h>
+	<random>
+	<ctime>
 
 1684898969 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\bullet.h
 	"Rectangle.h"
@@ -136,7 +138,8 @@
 	"Polygon.h"
 	"constants.h"
 
-1685898944 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
+1685976642 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
+	<stdio.h>
 	<vector>
 	<random>
 	<algorithm>
@@ -148,7 +151,7 @@
 	<chrono>
 	<thread>
 
-1685898877 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.cpp
+1685976276 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
 
 1684990956 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\gl_canvas2d.cpp
