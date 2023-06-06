@@ -75,7 +75,7 @@ void DrawShapes()
 }
 
 void handleMapMovement() {
-   map->move(1.5);
+   map->move(spaceship->getSpeed());
 }
 
 
@@ -150,7 +150,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100, 10, 2);
    map = new Map(screenWidth, screenHeight);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 

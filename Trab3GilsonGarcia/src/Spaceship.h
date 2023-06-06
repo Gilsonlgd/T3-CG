@@ -8,6 +8,7 @@
 
 using namespace std;
 
+#define SPEED_UP_INCREASE 0.02
 
 /*
 ##### Teclado #####
@@ -25,6 +26,7 @@ class Spaceship : public Polygon{
     float maxSpeed;
     float minSpeed;
 
+    int accelerating;
     bool isMoving;
     int xDirection;
     int yDirection;
@@ -38,8 +40,29 @@ class Spaceship : public Polygon{
             ammunition.push_back(new Bullet(5, 10, 10));
         }
     }
+
+    void renderBullets() {
+        if (firedBullets.size()) {
+            for (auto bullet : firedBullets) {
+                bullet->render();
+            }
+        }
+    }
+
+    void handleSpeedUp() {
+        if (accelerating != 0) {
+            if (speed < maxSpeed && accelerating == 1) {
+                speed += SPEED_UP_INCREASE;
+            } else if (speed > minSpeed && accelerating == -1) {
+                speed -= SPEED_UP_INCREASE;
+            }
+
+            if (speed > maxSpeed) speed = maxSpeed;
+            else if (speed < minSpeed) speed = minSpeed;
+        }
+    }
 public:
-    Spaceship(float x, float y, float height, float base) : Polygon(3){
+    Spaceship(float x, float y, float height, float base, float maxSpeed, float minSpeed) : Polygon(3){
         vx[0] = x - base/2;
         vy[0] = y + height/2;
 
@@ -51,10 +74,11 @@ public:
         
         this->height = height;
         this->base = base;
-        speed = 0;
+        speed = minSpeed;
         speed_up = 0;
-        maxSpeed = 10;
-        minSpeed = 5;
+        this->maxSpeed = maxSpeed;
+        this->minSpeed = minSpeed;
+        accelerating = 0;
         colorScale = RGBA;
         isMoving = false;
         xDirection = 0;
@@ -64,14 +88,11 @@ public:
     }
 
     virtual void render() override {
-        if (firedBullets.size()) {
-            for (auto bullet : firedBullets) {
-                bullet->render();
-            }
-        }
+        renderBullets();
 
+        handleSpeedUp();
         if (isMoving) {
-            translateBy(xDirection * 10, yDirection * 10);
+            translateBy(xDirection * speed, 0);
         }
 
         CV::translate(0, 0);
@@ -85,10 +106,10 @@ public:
     void startMove(int direction) {
         switch (direction) {
             case DOWN:
-                yDirection = 1;
+                accelerating = -1;
             break;
             case UP:
-                yDirection = -1;
+                accelerating = 1;
             break;
             case RIGHT:
                 xDirection = 1;
@@ -104,10 +125,10 @@ public:
     void stopMove(int direction) {
         switch (direction) {
             case DOWN:
-                yDirection = 0;
+                accelerating = 0;
             break;
             case UP:
-                yDirection = 0;
+                accelerating = 0;
             break;
             case RIGHT:
                 xDirection = 0;
