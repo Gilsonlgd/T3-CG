@@ -11,8 +11,8 @@
 
 #define STAR_SIZE 2
 #define STARS_PER_SEGMENT 150
-#define BSPLINE_X_RANGE 400
-#define BSPLINE_N_CONTROL_POINTS 20
+#define BSPLINE_X_RANGE 450
+#define BSPLINE_N_CONTROL_POINTS 10
 
 using namespace std;
 
@@ -58,25 +58,17 @@ class Map {
         starsX->clear();
         starsY->clear();
 
-        random_device rd;
-        mt19937 rng(rd());
-        uniform_int_distribution<int> distX(0, (int)baseWidth);
-        uniform_int_distribution<int> distY(0, (int)baseHeight);
-
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
-            starsX->push_back( (float)distX(rng) );
-            starsY->push_back( (float)distY(rng) );
+            starsX->push_back( randomFloat(0, baseWidth) );
+            starsY->push_back( randomFloat(0, baseHeight) );
         }
     }
 
     void reseedStar(float* x, float* y) {
         float minHeight = -(baseHeight / 4.0);
-        static std::mt19937 rng1(time(nullptr));
-        uniform_real_distribution<float> distX(0.0f, (float)baseWidth);
-        uniform_real_distribution<float> distY(minHeight, 0.0f);
-
-        *x = distX(rng1);
-        *y = distY(rng1);
+        
+        *x = randomFloat(0, baseWidth);
+        *y = randomFloat(minHeight, 0);
     }
 
     void seedControlPoints() {
@@ -95,7 +87,7 @@ class Map {
         float initialCordinate = -1000;
         for (int i = 0; i < BSPLINE_N_CONTROL_POINTS; i++) {
             bSplineY.push_back(initialCordinate);
-            initialCordinate += 100;
+            initialCordinate += 250;
         }
 
         sort(bSplineY.begin(), bSplineY.end());
@@ -148,7 +140,7 @@ public:
 
     void move(float speed) {
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
-            curStarsY[i] += speed;
+            curStarsY[i] += speed / 3;
             if (curStarsY[i] > baseHeight) {
                 reseedStar(&curStarsX[i], &curStarsY[i]);
             }
@@ -160,7 +152,7 @@ public:
 
         float *prevLastY = &bSplineY[bSplineY.size() - 5];
         if (*prevLastY > baseHeight + 200) {
-            bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = -1000;
+            bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = -550;
             sort(bSplineY.begin(), bSplineY.end());
 
             float xLeft = randomFloat(0, BSPLINE_X_RANGE);

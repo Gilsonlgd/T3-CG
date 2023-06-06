@@ -75,7 +75,7 @@ void DrawShapes()
 }
 
 void handleMapMovement() {
-   map->move(0.5);
+   map->move(1.5);
 }
 
 
