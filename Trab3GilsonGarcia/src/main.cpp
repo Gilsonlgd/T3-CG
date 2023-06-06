@@ -21,63 +21,39 @@
 #include "Spaceship.h"
 #include "Polygon.h"
 #include "Map.h"
+#include "HomeScreen.h"
 #include "FPSControl.h"
 
 #include "constants.h"
 
 using namespace std;
 
+#define STARTING_GAME 0
+#define RUNNING_GAME 1
+#define GAME_OVER 2
+
 Keyboard *kbd = NULL;
 Spaceship *spaceship = NULL;
 Map *map = NULL;
 FPSControl* fpsControl = NULL;
+HomeScreen* homeScreen = NULL;
 
 //variavel global para selecao do que sera exibido na canvas.
 int opcao  = 50;
 int screenWidth = 1200, screenHeight = 700; //largura e altura inicial da tela . Alteram com o redimensionamento de tela.
 int mouseX, mouseY;           //variaveis globais do mouse para poder exibir dentro da render().
-bool isDragging = false;      // estah arrastando?
-bool isResizing = false;      // estah redimensionando uma figura? só pode uma por vez
-bool isCTRLdown = false;      // estah segurando o ctrl?
-bool isSHIFTdown = false;     // estah segurando o shift?
-
-vector<float> controlPointsX;
-vector<float> controlPointsY;
-
-vector<float> bezierX;
-vector<float> bezierY;
-
-
-void drawControlBounds() {
-   for ( int i = 0; i < controlPointsX.size() - 1; i++) {
-      CV::translate(0,0);
-      CV::color(3);
-      CV::line(controlPointsX[i], controlPointsY[i], controlPointsX[i+1], controlPointsY[i+1]);
-   }
-}
-
-bool isMouseInsideDrawBounds(float x, float y) {
-   if (x > 0 && x < screenWidth) {
-      if (y > 0 && y < screenHeight) {
-         return true;
-      }
-   };
-   return false;
-}
+int gameState;
 
 void gameOver() {
    printf("\nVocê perdeu!\n");
    //exit(0);
 }
 
-void DrawShapes()
-{
- 
-}
 
 void handleMapMovement() {
    map->move(spaceship->getSpeed());
 }
+
 
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
@@ -85,11 +61,16 @@ void handleMapMovement() {
 //Deve-se manter essa fun��o com poucas linhas de codigo.
 void render()
 {
-   handleMapMovement();
+   if (gameState == STARTING_GAME) {
+      homeScreen->render();
+   }
 
-   map->render();
-   spaceship->render();
+   if (gameState == RUNNING_GAME) {
+      handleMapMovement();
 
+      map->render();
+      spaceship->render();
+   }
    fpsControl->limitRefreshRate();
 
    if (map->checkSpaceshipCollision(spaceship)) {
@@ -143,12 +124,17 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
    mouseX = x; //guarda as coordenadas do mouse para exibir dentro da render()
    mouseY = y;
 
-   if(state == 1) {
-      isDragging = false;
-   };
+   if(state == 1) {}
 
    if( state == 0 ) //clicou
    {
+      int state = homeScreen->checkButtonsClick(mouseX, mouseY);
+
+      if (state == START_GAME) {
+         gameState = RUNNING_GAME;
+      } else if (state == EXIT_GAME) {
+         exit(0);
+      }
    }
 
 }
@@ -158,6 +144,10 @@ int main(void)
    kbd = new Keyboard();
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100, 10, 2);
    map = new Map(screenWidth, screenHeight);
+   homeScreen = new HomeScreen(screenWidth, screenHeight, 4, "Spaceship Wars");
+   gameState = STARTING_GAME;
+
+
    map->setCollisionInterval(spaceship->getCenterY() - spaceship->getHeight()/2, spaceship->getCenterY() + spaceship->getHeight()/2);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 

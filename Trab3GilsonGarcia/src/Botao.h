@@ -37,7 +37,7 @@ public:
      strcpy(this->label, label);
   }
 
-  void Render()
+  void render()
   {
       float labelX = x + (largura - strlen(label)*CHAR_WIDTH)/2;
       float labelY = y + (altura + CHAR_HEIGHT)/2;

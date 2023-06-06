@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686076940 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686082415 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -200,6 +200,7 @@
 	"Spaceship.h"
 	"Polygon.h"
 	"Map.h"
+	"HomeScreen.h"
 	"FPSControl.h"
 	"constants.h"
 
@@ -251,4 +252,15 @@
 
 1686053566 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
+
+1686082626 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\homescreen.h
+	<stdio.h>
+	<list>
+	"gl_canvas2d.h"
+	"math_utils.h"
+	"Botao.h"
+
+1686081204 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\botao.h
+	"gl_canvas2d.h"
+	"constants.h"
 
