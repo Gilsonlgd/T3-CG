@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1685591288 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686076940 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -194,6 +194,7 @@
 	<iostream>
 	<list>
 	<chrono>
+	<random>
 	"gl_canvas2d.h"
 	"Keyboard.h"
 	"Spaceship.h"
@@ -206,13 +207,13 @@
 	<list>
 	<algorithm>
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
+1686076984 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
 	<list>
 	"Polygon.h"
 	"Keyboard.h"
 	"Bullet.h"
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
+1686053566 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
 	<vector>
 	<cmath>
 	"constants.h"
@@ -221,8 +222,11 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\constants.h
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
+1686071680 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
 	<vector>
+	<math.h>
+	<random>
+	<ctime>
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
 	"Rectangle.h"
@@ -231,16 +235,20 @@
 	"Polygon.h"
 	"constants.h"
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\map.h
+1686076263 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\map.h
+	<stdio.h>
 	<vector>
 	<random>
+	<algorithm>
 	"gl_canvas2d.h"
 	"math_utils.h"
+	<ctime>
+	"Spaceship.h"
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
 	<chrono>
 	<thread>
 
-1684990956 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
+1686053566 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
 

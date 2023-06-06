@@ -8,6 +8,7 @@
 #include "gl_canvas2d.h"
 #include "math_utils.h"
 #include <ctime>
+#include "Spaceship.h"
 
 #define STAR_SIZE 2
 #define STARS_PER_SEGMENT 150
@@ -29,6 +30,11 @@ class Map {
     vector<float> bSplineRightX;
 
     vector<float> bSplineY;
+
+    vector<Point*> collisionBitMapL;
+    vector<Point*> collisionBitMapR;
+    float collisionIntervalStart;
+    float collisionIntervalEnd;
 
     float baseWidth;
     float baseHeight;
@@ -104,6 +110,9 @@ class Map {
     }
 
     void renderBSpline() {
+        collisionBitMapL.clear();
+        collisionBitMapR.clear();
+
         for (int i = 0; i < bSplineY.size() - 3; i++) {
             for (float t = 0; t < 1; t += 0.001) {
                 float xLeft = evaluateBSpline(bSplineLeftX[i], bSplineLeftX[i + 1], bSplineLeftX[i + 2], bSplineLeftX[i + 3], t);
@@ -115,6 +124,19 @@ class Map {
                 CV::color(1,1,1);
                 CV::point(xLeft, y);
                 CV::point(xRight, y);
+
+                if (y >= collisionIntervalStart && y <= collisionIntervalEnd) {
+                    Point* pLeft = new Point();
+                    pLeft->x = xLeft;
+                    pLeft->y = y;
+                    
+                    Point* pRight = new Point();
+                    pRight->x = xRight;
+                    pRight->y = y;
+
+                    collisionBitMapL.push_back(pLeft);
+                    collisionBitMapR.push_back(pRight);
+                }
             }
         }  
     }
@@ -123,6 +145,8 @@ public:
     Map(float windowWidth, float windowHeight) {
         this->baseWidth = windowWidth;
         this->baseHeight = windowHeight;
+        collisionIntervalStart = 0;
+        collisionIntervalEnd = 0;
 
         initiateCoordinates();
         seedStars(&curStarsX, &curStarsY);
@@ -164,6 +188,27 @@ public:
             bSplineLeftX.insert(bSplineLeftX.begin(), xLeft);
             bSplineRightX.insert(bSplineRightX.begin(), xRight);
         }
+    }
+
+    void setCollisionInterval(float y1, float y2) {
+        collisionIntervalStart = y1;
+        collisionIntervalEnd = y2;
+    }
+
+    bool checkSpaceshipCollision(Spaceship* spaceship) {
+        
+        for (int i = 0; i < collisionBitMapL.size(); i++) {
+            
+            if (spaceship->hasPointCollided(collisionBitMapL[i]->x, collisionBitMapL[i]->y)) {
+                return true;
+            }
+
+            if (spaceship->hasPointCollided(collisionBitMapR[i]->x, collisionBitMapR[i]->y)) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 };
 

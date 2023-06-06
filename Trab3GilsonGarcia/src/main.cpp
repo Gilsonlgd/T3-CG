@@ -22,8 +22,6 @@
 #include "Polygon.h"
 #include "Map.h"
 #include "FPSControl.h"
-//#include "Export.h"
-//#include "Import.h"
 
 #include "constants.h"
 
@@ -33,8 +31,6 @@ Keyboard *kbd = NULL;
 Spaceship *spaceship = NULL;
 Map *map = NULL;
 FPSControl* fpsControl = NULL;
-//Export *exportData = NULL;
-//Import *importData = NULL;
 
 //variavel global para selecao do que sera exibido na canvas.
 int opcao  = 50;
@@ -69,6 +65,11 @@ bool isMouseInsideDrawBounds(float x, float y) {
    return false;
 }
 
+void gameOver() {
+   printf("\nVocê perdeu!\n");
+   //exit(0);
+}
+
 void DrawShapes()
 {
  
@@ -90,6 +91,10 @@ void render()
    spaceship->render();
 
    fpsControl->limitRefreshRate();
+
+   if (map->checkSpaceshipCollision(spaceship)) {
+      gameOver();
+   }
 }
 
 void handleStarshipMovement() {
@@ -143,7 +148,8 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
    };
 
    if( state == 0 ) //clicou
-   { }
+   {
+   }
 
 }
 
@@ -152,6 +158,7 @@ int main(void)
    kbd = new Keyboard();
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100, 10, 2);
    map = new Map(screenWidth, screenHeight);
+   map->setCollisionInterval(spaceship->getCenterY() - spaceship->getHeight()/2, spaceship->getCenterY() + spaceship->getHeight()/2);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 
    CV::init(&screenWidth, &screenHeight, "");

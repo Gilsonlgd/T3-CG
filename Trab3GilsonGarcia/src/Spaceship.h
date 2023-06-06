@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define SPEED_UP_INCREASE 0.02
+#define SPEED_UP_INCREASE 0.04
 
 /*
 ##### Teclado #####
