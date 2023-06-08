@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686251554 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686252061 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -195,6 +195,7 @@
 	<list>
 	<chrono>
 	<random>
+	<string>
 	"gl_canvas2d.h"
 	"Keyboard.h"
 	"Spaceship.h"
@@ -208,7 +209,7 @@
 	<list>
 	<algorithm>
 
-1686076984 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
+1686256406 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
 	<list>
 	"Polygon.h"
 	"Keyboard.h"
@@ -246,7 +247,7 @@
 	<ctime>
 	"Spaceship.h"
 
-1686251605 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
+1686251733 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
 	<iostream>
 	<chrono>
 	<thread>

@@ -45,6 +45,10 @@ class Spaceship : public Polygon{
         if (firedBullets.size()) {
             for (auto bullet : firedBullets) {
                 bullet->render();
+                if (bullet->getBulletY() < -10) {
+                    firedBullets.remove(bullet);
+                    delete bullet;
+                }
             }
         }
     }
