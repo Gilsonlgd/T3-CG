@@ -144,7 +144,7 @@ int main(void)
    kbd = new Keyboard();
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100, 10, 2);
    map = new Map(screenWidth, screenHeight);
-   homeScreen = new HomeScreen(screenWidth, screenHeight, 4, "Spaceship Wars");
+   homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
    gameState = STARTING_GAME;
 
 
