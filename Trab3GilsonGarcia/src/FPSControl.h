@@ -1,3 +1,4 @@
+#include <iostream>
 #include <chrono>
 #include <thread>
 
@@ -6,31 +7,33 @@ using namespace std;
 class FPSControl {
     int maxFrameRate;
     double actualFrameRate;
-    chrono::milliseconds waitingTime;
+    chrono::milliseconds frameDelay;
     chrono::steady_clock::time_point priorTime;
     chrono::steady_clock::time_point presentTime;
 public:
     FPSControl(int maxFrameRate_, chrono::steady_clock::time_point priorTime_) {
         maxFrameRate = maxFrameRate_;
         priorTime = priorTime_;
-        waitingTime = chrono::milliseconds(1000 / maxFrameRate);
+        frameDelay = chrono::milliseconds(1000 / maxFrameRate);
     }
 
     void limitRefreshRate() {
         presentTime = chrono::steady_clock::now();
         chrono::milliseconds elapsedTime = chrono::duration_cast<chrono::milliseconds>(presentTime - priorTime);
 
-        if (elapsedTime < waitingTime) {
-            this_thread::sleep_for(waitingTime - elapsedTime);
+        if (elapsedTime < frameDelay) {
+            this_thread::sleep_for(frameDelay - elapsedTime);
+            presentTime = chrono::steady_clock::now();  
+            elapsedTime = chrono::duration_cast<chrono::milliseconds>(presentTime - priorTime); 
         }
 
-        priorTime = chrono::steady_clock::now();
+        priorTime = presentTime; 
 
-        double elapsedSeconds = waitingTime.count() / 1000.0;
-        actualFrameRate = 1.0 / elapsedSeconds; 
+        float elapsedSeconds = elapsedTime.count() / 1000.0f;
+        actualFrameRate = 1.0f / elapsedSeconds;
     }
 
-    int getActualFrameRate() {
-        return (int)actualFrameRate;
+    float getActualFrameRate() {
+        return actualFrameRate;
     }
 };

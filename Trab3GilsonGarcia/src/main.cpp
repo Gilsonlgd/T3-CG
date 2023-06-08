@@ -14,6 +14,7 @@
 #include <list>
 #include <chrono>
 #include <random>
+#include <string>
 
 #include "gl_canvas2d.h"
 
@@ -54,6 +55,14 @@ void handleMapMovement() {
    map->move(spaceship->getSpeed());
 }
 
+void drawFrameRate() {
+   int FPS = (int)(fpsControl->getActualFrameRate()); 
+   string frameRate = "FPS: " + to_string(FPS);
+
+   CV::color(1, 1, 1);
+   CV::text(screenWidth - 100, 20, frameRate.c_str());
+}
+
 
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
@@ -71,11 +80,13 @@ void render()
       map->render();
       spaceship->render();
    }
-   fpsControl->limitRefreshRate();
 
    if (map->checkSpaceshipCollision(spaceship)) {
       gameOver();
    }
+
+   fpsControl->limitRefreshRate();
+   drawFrameRate();
 }
 
 void handleStarshipMovement() {
@@ -142,7 +153,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 50, 100, 10, 2);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 10, 2);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
    gameState = STARTING_GAME;
