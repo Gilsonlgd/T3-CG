@@ -116,6 +116,9 @@ class Map {
         playerCollisionBitMapL.clear();
         playerCollisionBitMapR.clear();
 
+        enemiesCollisionBitMapL.clear();
+        enemiesCollisionBitMapR.clear();
+
         for (int i = 0; i < bSplineY.size() - 3; i++) {
             for (float t = 0; t < 1; t += 0.001) {
                 float xLeft = evaluateBSpline(bSplineLeftX[i], bSplineLeftX[i + 1], bSplineLeftX[i + 2], bSplineLeftX[i + 3], t);
@@ -233,17 +236,6 @@ public:
     }
 
     float getEnemiesIntervalMinX() {
-        float minX = 1000000;
-        for (int i = 0; i < enemiesCollisionBitMapL.size(); i++) {
-            if (enemiesCollisionBitMapL[i]->x < minX) {
-                minX = enemiesCollisionBitMapL[i]->x;
-            }
-        }
-
-        return minX;
-    }
-
-    float getEnemiesIntervalMaxX() {
         float maxX = -1000000;
         for (int i = 0; i < enemiesCollisionBitMapL.size(); i++) {
             if (enemiesCollisionBitMapL[i]->x > maxX) {

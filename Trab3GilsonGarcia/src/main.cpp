@@ -69,12 +69,9 @@ void handleEnemiesSpawn() {
    chrono::milliseconds waveInterval = enemiesController->getWaveInterval();
 
    if (elapsedTime.count() > waveInterval.count()) {
-      float startX = map->getEnemiesIntervalMaxX();
-      float endX = screenWidth - startX;
-      float intervalLen = endX - startX;
-      int nEnemies = (int)(intervalLen / (ENEMIES_WIDTH + ENEMIES_SPACING));
-
-      enemiesController->spawnEnemiesWave(nEnemies, startX, currentTime);
+      float xStart = map->getEnemiesIntervalMinX();
+      float xEnd = screenWidth - xStart;
+      enemiesController->spawnEnemiesWave(xStart, xEnd, currentTime);
    }
 }
 
@@ -186,10 +183,10 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 10, 2);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 2.5, 1);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
-   enemiesController = new EnemiesController(4, screenHeight);
+   enemiesController = new EnemiesController(screenHeight);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 
    map->setPlayerCollisionInterval(spaceship->getCenterY() - spaceship->getHeight()/2, spaceship->getCenterY() + spaceship->getHeight()/2);

@@ -15,6 +15,7 @@ using namespace std;
 #define ENEMIES_WIDTH 30.0
 #define ENEMIES_HEIGHT 65.0
 #define ENEMIES_SPACING 50
+#define SPAWN_OFFSET 40
 
 /*
 ##### Teclado #####
@@ -25,17 +26,17 @@ Implementa controle do teclado
 class EnemiesController{
     list<Enemy*> enemies;
     float windowHeight; 
+    int maxEnemiesPerWave;
     chrono::milliseconds waveInterval;
     chrono::steady_clock::time_point lastWaveTime;
 
 public:
-    EnemiesController(int nEnemies, float windowHeight) {
+    EnemiesController(float windowHeight) {
         enemies = list<Enemy*>();
         this->windowHeight = windowHeight;
+        maxEnemiesPerWave = 4;
         waveInterval = chrono::milliseconds(INITIAL_WAVE_INTERVAL);
         lastWaveTime = chrono::steady_clock::now();
-
-        spawnEnemiesWave(10, 200, lastWaveTime);
     }
 
     void render() {
@@ -44,9 +45,24 @@ public:
         }
     }
 
-    void spawnEnemiesWave(int nEnemies, float xStart, chrono::steady_clock::time_point currentTime) {
+    void spawnEnemiesWave(float xStart, float xEnd, chrono::steady_clock::time_point currentTime) {
+        float intervalLen = xEnd - xStart;
+        int nEnemies = (int)(intervalLen / (ENEMIES_WIDTH + ENEMIES_SPACING));
+        
+        if (nEnemies > maxEnemiesPerWave) {
+            nEnemies = maxEnemiesPerWave;
+        }
+
+        float totalEnemiesWidth = nEnemies * (ENEMIES_WIDTH + ENEMIES_SPACING);
+        float xRange = intervalLen - totalEnemiesWidth;
+        float xRangeStart = randomFloat(xStart, xStart + xRange);
+        float curXTranslation = xRangeStart - xStart;
+
+
         for (int i = 0; i < nEnemies; i++) {
-            enemies.push_back(new Enemy(xStart + i * (ENEMIES_WIDTH + ENEMIES_SPACING), Y_AXIS_SPAWN, ENEMIES_WIDTH, ENEMIES_HEIGHT, 2));
+            Enemy* enemy = new Enemy(xRangeStart + SPAWN_OFFSET + i * (ENEMIES_WIDTH + ENEMIES_SPACING), Y_AXIS_SPAWN, ENEMIES_WIDTH, ENEMIES_HEIGHT, xRange);
+            enemy->setCurrentXTranslation(curXTranslation);
+            enemies.push_back(enemy);
             lastWaveTime = currentTime;
         }
     }

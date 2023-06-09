@@ -97,7 +97,7 @@ public:
 
         handleSpeedUp();
         if (isMoving) {
-            translateBy(xDirection * speed, 0);
+            translateBy(xDirection * 4, 0);
         }
 
         CV::translate(0, 0);

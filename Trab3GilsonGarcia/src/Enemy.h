@@ -10,6 +10,7 @@
 using namespace std;
 
 #define SPEED_UP_INCREASE 0.04
+#define INITIAL_SPEED_X 1.5
 
 /*
 ##### Teclado #####
@@ -21,7 +22,9 @@ class Enemy : public Polygon{
     float height;
     float width;
 
-    float speed;
+    float ySpeed;
+    float xSpeed;
+
     float speed_up;
 
     int accelerating;
@@ -31,6 +34,7 @@ class Enemy : public Polygon{
     int indexColor;
 
     float maxXrange;
+    float curXTranslation;
 
     list<Bullet*> firedBullets;
 
@@ -76,13 +80,14 @@ public:
 
         colorScale = RGBA;
         indexColor = 0;
-        xDirection = 0;
+        xDirection = 1;
         yDirection = 1;
+        curXTranslation = 0;
+        xSpeed = INITIAL_SPEED_X;
     }
 
     virtual void render() override {
         renderBullets();
-        translateBy(xDirection * speed, 0);
 
         CV::translate(0, 0);
         if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 213.0/265, 1);
@@ -116,12 +121,20 @@ public:
         this->width = width;
     }
 
-    float getSpeed() {
-        return speed;
+    float getSpeedY() {
+        return ySpeed;
     }
 
-    void setSpeed(float speed) {
-        this->speed = speed;
+    void setSpeedY(float ySpeed) {
+        this->ySpeed = ySpeed;
+    }
+
+    float getSpeedX() {
+        return xSpeed;
+    }
+
+    void setSpeedX(float xSpeed) {
+        this->xSpeed = xSpeed;
     }
 
     float getSpeedUp() {
@@ -132,8 +145,24 @@ public:
         this->speed_up = speed_up;
     }
 
-    void move(float speed) {
-        translateBy(0, speed);
+    void setCurrentXTranslation(float curXTranslation) {
+        this->curXTranslation = curXTranslation;
+    }
+
+    void move(float ySpeed) {
+        if (curXTranslation <= 0) {
+            xDirection = 1;
+        } else if (curXTranslation >= maxXrange) {
+            xDirection = -1;
+        }
+
+        if (xDirection == 1) {
+            curXTranslation += xSpeed;
+        } else {
+            curXTranslation -= xSpeed;
+        }
+        
+        translateBy(xSpeed * xDirection, ySpeed);
     }
 
     bool checkBulletCollision(Bullet* bullet) {
