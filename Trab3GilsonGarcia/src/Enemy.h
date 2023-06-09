@@ -43,18 +43,12 @@ class Enemy : public Polygon{
             for (auto bullet : firedBullets) {
                 bullet->render();
 
-                if (bullet->getBulletY() < -10) {
+                if (bullet->getBulletY() > 900) {
                     firedBullets.remove(bullet);
                     delete bullet;
                 }
             }
         }
-    }
-
-    void shot() {
-        Bullet* bullet = new Bullet(5, 10, 10);
-        bullet->fireBullet(vx[0], vy[0] + height);
-        firedBullets.push_back(bullet);
     }
 
 public:
@@ -179,6 +173,13 @@ public:
         }
 
         return hasPolygonCollided(bullet->getVx(), bullet->getVy());
+    }
+
+    void shot() {
+        Bullet* bullet = new Bullet(5, 10, 10);
+        bullet->setYDirection(BULLET_DOWN);
+        bullet->fireBullet(vx[0], vy[0] + height);
+        firedBullets.push_back(bullet);
     }
 };
 

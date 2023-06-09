@@ -2,6 +2,8 @@
 #define BULLET_H_INCLUDED
 
 #include "Rectangle.h"
+#define BULLET_UP -1
+#define BULLET_DOWN 1
 
 using namespace std;
 
@@ -9,6 +11,7 @@ class Bullet : public Rectangle {
     float speed;
     float speed_up;
     bool isFired;
+    int yDirection;
 
 public: 
     Bullet(float width, float height, float speed) : Rectangle(0, 0) {
@@ -16,6 +19,7 @@ public:
         this->height = height;
         this->speed = speed;
         isFired = false;
+        yDirection = BULLET_UP;
     }
 
     void render() override {
@@ -25,7 +29,7 @@ public:
             else if (colorScale == INDEX14)  CV::color(indexColor);
 
             CV::polygonFill(vx.data(), vy.data(), 4);
-            translateBy(0, -speed);
+            translateBy(0, speed * yDirection);
         }
     }
 
@@ -41,6 +45,10 @@ public:
 
     float getBulletX() {
         return vx[0];
+    }
+
+    void setYDirection(int direction) {
+        yDirection = direction;
     }
 
     vector<float> getVx() {

@@ -12,6 +12,7 @@ using namespace std;
 #define Y_AXIS_SPAWN -100.0
 #define SPEED_UP_INCREASE 0.04
 #define INITIAL_WAVE_INTERVAL 5000
+#define INITIAL_SHOTS_INTERVAL 1000
 #define ENEMIES_WIDTH 30.0
 #define ENEMIES_HEIGHT 65.0
 #define ENEMIES_SPACING 50
@@ -30,18 +31,33 @@ class EnemiesController{
     chrono::milliseconds waveInterval;
     chrono::steady_clock::time_point lastWaveTime;
 
+    chrono::milliseconds shotsInterval;
+    chrono::steady_clock::time_point lastShotTime;
+
 public:
     EnemiesController(float windowHeight) {
         enemies = list<Enemy*>();
         this->windowHeight = windowHeight;
         maxEnemiesPerWave = 4;
+
         waveInterval = chrono::milliseconds(INITIAL_WAVE_INTERVAL);
+        shotsInterval = chrono::milliseconds(INITIAL_SHOTS_INTERVAL);
+
+        lastShotTime = chrono::steady_clock::now();
         lastWaveTime = chrono::steady_clock::now();
     }
 
     void render() {
         for (Enemy* enemy : enemies) {
             enemy->render();
+        }
+
+        chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
+        if (currentTime - lastShotTime > shotsInterval) {
+            for (Enemy* enemy : enemies) {
+                enemy->shot();
+            }
+            lastShotTime = chrono::steady_clock::now();
         }
     }
 
