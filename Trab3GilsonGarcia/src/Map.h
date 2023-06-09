@@ -13,7 +13,7 @@
 #define STAR_SIZE 2
 #define STARS_PER_SEGMENT 150
 #define BSPLINE_X_RANGE 400
-#define BSPLINE_N_CONTROL_POINTS 10
+#define BSPLINE_N_CONTROL_POINTS 10 
 
 using namespace std;
 
@@ -31,10 +31,15 @@ class Map {
 
     vector<float> bSplineY;
 
-    vector<Point*> collisionBitMapL;
-    vector<Point*> collisionBitMapR;
-    float collisionIntervalStart;
-    float collisionIntervalEnd;
+    vector<Point*> playerCollisionBitMapL;
+    vector<Point*> playerCollisionBitMapR;
+    float playerCollisionIntervalStart;
+    float playerCollisionIntervalEnd;
+
+    vector<Point*> enemiesCollisionBitMapL;
+    vector<Point*> enemiesCollisionBitMapR;
+    float enemiesCollisionIntervalStart;
+    float enemiesCollisionIntervalEnd;
 
     float baseWidth;
     float baseHeight;
@@ -108,8 +113,8 @@ class Map {
     }
 
     void renderBSpline() {
-        collisionBitMapL.clear();
-        collisionBitMapR.clear();
+        playerCollisionBitMapL.clear();
+        playerCollisionBitMapR.clear();
 
         for (int i = 0; i < bSplineY.size() - 3; i++) {
             for (float t = 0; t < 1; t += 0.001) {
@@ -123,7 +128,7 @@ class Map {
                 CV::point(xLeft, y);
                 CV::point(xRight, y);
 
-                if (y >= collisionIntervalStart && y <= collisionIntervalEnd) {
+                if (y >= playerCollisionIntervalStart && y <= playerCollisionIntervalEnd) {
                     Point* pLeft = new Point();
                     pLeft->x = xLeft;
                     pLeft->y = y;
@@ -132,8 +137,21 @@ class Map {
                     pRight->x = xRight;
                     pRight->y = y;
 
-                    collisionBitMapL.push_back(pLeft);
-                    collisionBitMapR.push_back(pRight);
+                    playerCollisionBitMapL.push_back(pLeft);
+                    playerCollisionBitMapR.push_back(pRight);
+                }
+
+                if (y >= enemiesCollisionIntervalStart && y <= enemiesCollisionIntervalEnd) {
+                    Point* pLeft = new Point();
+                    pLeft->x = xLeft;
+                    pLeft->y = y;
+                    
+                    Point* pRight = new Point();
+                    pRight->x = xRight;
+                    pRight->y = y;
+
+                    enemiesCollisionBitMapL.push_back(pLeft);
+                    enemiesCollisionBitMapR.push_back(pRight);
                 }
             }
         }  
@@ -143,8 +161,8 @@ public:
     Map(float windowWidth, float windowHeight) {
         this->baseWidth = windowWidth;
         this->baseHeight = windowHeight;
-        collisionIntervalStart = 0;
-        collisionIntervalEnd = 0;
+        playerCollisionIntervalStart = 0;
+        playerCollisionIntervalEnd = 0;
 
         initiateCoordinates();
         seedStars(&curStarsX, &curStarsY);
@@ -188,25 +206,52 @@ public:
         }
     }
 
-    void setCollisionInterval(float y1, float y2) {
-        collisionIntervalStart = y1;
-        collisionIntervalEnd = y2;
+    void setPlayerCollisionInterval(float y1, float y2) {
+        playerCollisionIntervalStart = y1;
+        playerCollisionIntervalEnd = y2;
+    }
+
+    void setEnemiesCollisionInterval(float y1, float y2) {
+        enemiesCollisionIntervalStart = y1;
+        enemiesCollisionIntervalEnd = y2;
     }
 
     bool checkSpaceshipCollision(Spaceship* spaceship) {
         
-        for (int i = 0; i < collisionBitMapL.size(); i++) {
+        for (int i = 0; i < playerCollisionBitMapL.size(); i++) {
             
-            if (spaceship->hasPointCollided(collisionBitMapL[i]->x, collisionBitMapL[i]->y)) {
+            if (spaceship->hasPointCollided(playerCollisionBitMapL[i]->x, playerCollisionBitMapL[i]->y)) {
                 return true;
             }
 
-            if (spaceship->hasPointCollided(collisionBitMapR[i]->x, collisionBitMapR[i]->y)) {
+            if (spaceship->hasPointCollided(playerCollisionBitMapR[i]->x, playerCollisionBitMapR[i]->y)) {
                 return true;
             }
         }
         
         return false;
+    }
+
+    float getEnemiesIntervalMinX() {
+        float minX = 1000000;
+        for (int i = 0; i < enemiesCollisionBitMapL.size(); i++) {
+            if (enemiesCollisionBitMapL[i]->x < minX) {
+                minX = enemiesCollisionBitMapL[i]->x;
+            }
+        }
+
+        return minX;
+    }
+
+    float getEnemiesIntervalMaxX() {
+        float maxX = -1000000;
+        for (int i = 0; i < enemiesCollisionBitMapL.size(); i++) {
+            if (enemiesCollisionBitMapL[i]->x > maxX) {
+                maxX = enemiesCollisionBitMapL[i]->x;
+            }
+        }
+
+        return maxX;
     }
 };
 
