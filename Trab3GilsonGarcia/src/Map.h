@@ -12,7 +12,7 @@
 
 #define STAR_SIZE 2
 #define STARS_PER_SEGMENT 150
-#define BSPLINE_X_RANGE 450
+#define BSPLINE_X_RANGE 400
 #define BSPLINE_N_CONTROL_POINTS 10
 
 using namespace std;
@@ -38,8 +38,6 @@ class Map {
 
     float baseWidth;
     float baseHeight;
-
-
 
     void initiateCoordinates() {
         for (int i = 0; i < 4; i++) {
@@ -164,7 +162,7 @@ public:
 
     void move(float speed) {
         for (int i = 0; i < STARS_PER_SEGMENT; i++) {
-            curStarsY[i] += speed / 3;
+            curStarsY[i] += speed / 20;
             if (curStarsY[i] > baseHeight) {
                 reseedStar(&curStarsX[i], &curStarsY[i]);
             }

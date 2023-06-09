@@ -21,6 +21,7 @@
 #include "Keyboard.h"
 #include "Spaceship.h"
 #include "Polygon.h"
+#include "EnemiesController.h"
 #include "Map.h"
 #include "HomeScreen.h"
 #include "FPSControl.h"
@@ -38,6 +39,7 @@ Spaceship *spaceship = NULL;
 Map *map = NULL;
 FPSControl* fpsControl = NULL;
 HomeScreen* homeScreen = NULL;
+EnemiesController* enemiesController = NULL;
 
 //variavel global para selecao do que sera exibido na canvas.
 int opcao  = 50;
@@ -45,25 +47,42 @@ int screenWidth = 1200, screenHeight = 700; //largura e altura inicial da tela .
 int mouseX, mouseY;           //variaveis globais do mouse para poder exibir dentro da render().
 int gameState;
 
+void handleMapMovement() {
+   map->move(spaceship->getSpeed());
+   enemiesController->move(spaceship->getSpeed());
+}
+
+void handlePlayerShotsCollision() {
+   list<Bullet*> shots = spaceship->getShots();
+
+   for (Bullet* bullet : shots) {
+      if (enemiesController->checkBulletCollision(bullet)) {
+         spaceship->removeShot(bullet);
+      }
+   }
+}
+
+void handleRunningGame() {
+   handleMapMovement();
+   handlePlayerShotsCollision();
+
+   map->render();
+   spaceship->render();
+   enemiesController->render();
+}
+
 void gameOver() {
    printf("\nVocê perdeu!\n");
    //exit(0);
 }
 
-
-void handleMapMovement() {
-   map->move(spaceship->getSpeed());
-}
-
-void drawFrameRate() {
+void printFrameRate() {
    int FPS = (int)(fpsControl->getActualFrameRate()); 
    string frameRate = "FPS: " + to_string(FPS);
 
    CV::color(1, 1, 1);
    CV::text(screenWidth - 100, 20, frameRate.c_str());
 }
-
-
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
 //Todos os comandos para desenho na canvas devem ser chamados dentro da render().
@@ -75,10 +94,7 @@ void render()
    }
 
    if (gameState == RUNNING_GAME) {
-      handleMapMovement();
-
-      map->render();
-      spaceship->render();
+      handleRunningGame();
    }
 
    if (map->checkSpaceshipCollision(spaceship)) {
@@ -86,7 +102,7 @@ void render()
    }
 
    fpsControl->limitRefreshRate();
-   drawFrameRate();
+   printFrameRate();
 }
 
 void handleStarshipMovement() {
@@ -156,12 +172,12 @@ int main(void)
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 10, 2);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
-   gameState = STARTING_GAME;
-
-
-   map->setCollisionInterval(spaceship->getCenterY() - spaceship->getHeight()/2, spaceship->getCenterY() + spaceship->getHeight()/2);
+   enemiesController = new EnemiesController(4);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 
+   map->setCollisionInterval(spaceship->getCenterY() - spaceship->getHeight()/2, spaceship->getCenterY() + spaceship->getHeight()/2);
+
+   gameState = STARTING_GAME;
    CV::init(&screenWidth, &screenHeight, "");
    CV::run();
 }

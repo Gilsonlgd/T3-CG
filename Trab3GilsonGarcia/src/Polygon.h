@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <cmath>
+#include <iostream>
+#include <cfloat>
 #include "constants.h"
 #include "math_utils.h"
 #include "gl_canvas2d.h"
@@ -168,37 +170,56 @@ public:
     }
 
     // Algoritmo SAT de detecção de colisão
-    bool hasPolygonCollided(vector<float>& polygon1, vector<float>& polygon2) {
-        size_t n1 = polygon1.size() / 2;
-        size_t n2 = polygon2.size() / 2;
+     bool hasPolygonCollided(const vector<float>& vx1, const vector<float>& vy1) {
+        // Concatenate the vertices of both polygons
+        vector<float> combinedVx = vx;
+        vector<float> combinedVy = vy;
+        combinedVx.insert(combinedVx.end(), vx1.begin(), vx1.end());
+        combinedVy.insert(combinedVy.end(), vy1.begin(), vy1.end());
 
-        for (size_t i = 0; i < n1 + n2; i++) {
-            float axisX, axisY;
-            if (i < n1) {
-                size_t j = (i + 1) % n1;
-                axisX = polygon1[2 * j + 1] - polygon1[2 * i + 1];
-                axisY = polygon1[2 * i] - polygon1[2 * j];
-            } else {
-                size_t j = (i + 1 - n1) % n2;
-                axisX = polygon2[2 * j + 1] - polygon2[2 * i + 1];
-                axisY = polygon2[2 * i] - polygon2[2 * j];
+        // Perform the SAT check
+        for (int i = 0; i < nPoints; i++) {
+            int nextIndex = (i + 1) % nPoints;
+
+            // Get the edge vector
+            float edgeX = vx[i] - vx[nextIndex];
+            float edgeY = vy[i] - vy[nextIndex];
+
+            // Calculate the perpendicular vector
+            float perpendicularX = -edgeY;
+            float perpendicularY = edgeX;
+
+            // Normalize the perpendicular vector
+            float magnitude = sqrt(perpendicularX * perpendicularX + perpendicularY * perpendicularY);
+            perpendicularX /= magnitude;
+            perpendicularY /= magnitude;
+
+            // Project the vertices onto the perpendicular vector
+            float minProjectionA = FLT_MAX;
+            float maxProjectionA = -FLT_MAX;
+            float minProjectionB = FLT_MAX;
+            float maxProjectionB = -FLT_MAX;
+
+            for (int j = 0; j < combinedVx.size(); j++) {
+                float projection = combinedVx[j] * perpendicularX + combinedVy[j] * perpendicularY;
+
+                if (j < nPoints) {
+                    minProjectionA = min(minProjectionA, projection);
+                    maxProjectionA = max(maxProjectionA, projection);
+                } else {
+                    minProjectionB = min(minProjectionB, projection);
+                    maxProjectionB = max(maxProjectionB, projection);
+                }
             }
 
-            // Normalização
-            float axisLength = sqrt(axisX * axisX + axisY * axisY);
-            axisX /= axisLength;
-            axisY /= axisLength;
-
-            // Projeção dos polígonos
-            float min1, max1, min2, max2;
-            projectPolygon(polygon1, axisX, axisY, min1, max1);
-            projectPolygon(polygon2, axisX, axisY, min2, max2);
-
-            // Checka se houve sobreposição
-            if (max1 < min2 || max2 < min1) {
+            // Check for overlap
+            if (!(maxProjectionB >= minProjectionA && maxProjectionA >= minProjectionB)) {
+                // The projections do not overlap, so the polygons are not colliding
                 return false;
             }
         }
+
+        // All projections overlap, so the polygons are colliding
         return true;
     }
 

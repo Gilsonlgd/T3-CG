@@ -38,6 +38,18 @@ public:
     float getBulletY() {
         return vy[0];
     }
+
+    float getBulletX() {
+        return vx[0];
+    }
+
+    vector<float> getVx() {
+        return vx;
+    }
+
+    vector<float> getVy() {
+        return vy;
+    }
 };
 
 #endif //BULLET_H_INCLUDED

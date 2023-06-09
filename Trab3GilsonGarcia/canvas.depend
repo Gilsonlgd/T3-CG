@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686252061 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686273824 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -200,6 +200,7 @@
 	"Keyboard.h"
 	"Spaceship.h"
 	"Polygon.h"
+	"EnemiesController.h"
 	"Map.h"
 	"HomeScreen.h"
 	"FPSControl.h"
@@ -209,15 +210,17 @@
 	<list>
 	<algorithm>
 
-1686256406 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
+1686273247 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
 	<list>
 	"Polygon.h"
 	"Keyboard.h"
 	"Bullet.h"
 
-1686053566 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
+1686272184 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
 	<vector>
 	<cmath>
+	<iostream>
+	<cfloat>
 	"constants.h"
 	"math_utils.h"
 	"gl_canvas2d.h"
@@ -230,14 +233,14 @@
 	<random>
 	<ctime>
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
+1686271959 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
 	"Rectangle.h"
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\rectangle.h
 	"Polygon.h"
 	"constants.h"
 
-1686076263 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\map.h
+1686269908 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\map.h
 	<stdio.h>
 	<vector>
 	<random>
@@ -252,7 +255,7 @@
 	<chrono>
 	<thread>
 
-1686053566 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
+1686268345 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
 
 1686245264 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\homescreen.h
@@ -265,4 +268,16 @@
 1686081204 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\botao.h
 	"gl_canvas2d.h"
 	"constants.h"
+
+1686272230 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemy.h
+	<list>
+	"stdio.h"
+	"Polygon.h"
+	"Keyboard.h"
+	"Bullet.h"
+
+1686273764 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
+	<list>
+	"stdio.h"
+	"Enemy.h"
 
