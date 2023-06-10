@@ -33,6 +33,7 @@ using namespace std;
 #define STARTING_GAME 0
 #define RUNNING_GAME 1
 #define GAME_OVER 2
+#define SCORE_PER_SHOT 10
 
 Keyboard *kbd = NULL;
 Spaceship *spaceship = NULL;
@@ -47,7 +48,23 @@ int screenWidth = 1200, screenHeight = 700; //largura e altura inicial da tela .
 int mouseX, mouseY;           //variaveis globais do mouse para poder exibir dentro da render().
 int gameState;
 float deltaTime;
+float score;
 
+void printFrameRate() {
+   int FPS = (int)(fpsControl->getActualFrameRate()); 
+   string frameRate = "FPS: " + to_string(FPS);
+
+   CV::color(1, 1, 1);
+   CV::text(screenWidth - 100, 80, frameRate.c_str());
+}
+
+void printScore() {
+   string scoreText = "Score: " + to_string((int)score);
+
+   CV::color(1, 1, 1);
+   CV::text(screenWidth - 180, 45, scoreText.c_str());
+   CV::rect(screenWidth - 200, 20, screenWidth - 20, 60);
+}
 
 void gameOver() {
    printf("\nVocê perdeu!\n");
@@ -69,6 +86,7 @@ void handlePlayerShotsCollision() {
 
    for (Bullet* bullet : shots) {
       if (enemiesController->checkBulletCollision(bullet)) {
+         score += SCORE_PER_SHOT;
          spaceship->removeShot(bullet);
       }
    }
@@ -109,14 +127,8 @@ void handleRunningGame() {
    map->render();
    spaceship->render();
    enemiesController->render();
-}
 
-void printFrameRate() {
-   int FPS = (int)(fpsControl->getActualFrameRate()); 
-   string frameRate = "FPS: " + to_string(FPS);
-
-   CV::color(1, 1, 1);
-   CV::text(screenWidth - 100, 20, frameRate.c_str());
+   printScore();
 }
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
@@ -216,6 +228,7 @@ int main(void)
    map->setEnemiesCollisionInterval(enemiesController->getYAxisSpawn(), enemiesController->getYAxisSpawn() + enemiesController->getEnemiesHeight());
 
    gameState = STARTING_GAME;
+   score = 0;
    CV::init(&screenWidth, &screenHeight, "");
    CV::run();
 }

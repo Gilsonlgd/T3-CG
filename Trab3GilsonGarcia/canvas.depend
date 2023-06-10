@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686424941 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686428638 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -251,7 +251,7 @@
 	<ctime>
 	"Spaceship.h"
 
-1686423354 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
+1686429409 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
 	<iostream>
 	<chrono>
 	<thread>

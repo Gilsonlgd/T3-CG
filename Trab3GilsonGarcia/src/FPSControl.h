@@ -2,15 +2,19 @@
 #include <chrono>
 #include <thread>
 
+#define TIME_BETWEEN_FPS_CAPTURE 250
+
 using namespace std;
 
 class FPSControl {
     int maxFrameRate;
     double actualFrameRate;
+
     chrono::milliseconds frameDelay;
     chrono::milliseconds deltaTime;
     chrono::steady_clock::time_point priorTime;
     chrono::steady_clock::time_point presentTime;
+    chrono::steady_clock::time_point lastFrameRateCapture;
 public:
     FPSControl(int maxFrameRate_, chrono::steady_clock::time_point priorTime_) {
         maxFrameRate = maxFrameRate_;
@@ -32,7 +36,13 @@ public:
 
         float elapsedSeconds = elapsedTime.count() / 1000.0f;
         deltaTime = elapsedTime;
-        actualFrameRate = 1.0f / elapsedSeconds;
+
+        chrono::milliseconds elapsedTimeBetweenFPSCapture = chrono::duration_cast<chrono::milliseconds>(presentTime - lastFrameRateCapture);
+        chrono::milliseconds timeBetweenFPSCapture = chrono::milliseconds(TIME_BETWEEN_FPS_CAPTURE);
+        if (elapsedTimeBetweenFPSCapture > timeBetweenFPSCapture) {
+            actualFrameRate = 1.0f / elapsedSeconds;
+            lastFrameRateCapture = presentTime;
+        }
     }
 
     float getActualFrameRate() {
@@ -42,4 +52,5 @@ public:
     float getDeltaTime() {
         return deltaTime.count() / 16;
     }
+    
 };
