@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686428638 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686431029 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -210,7 +210,7 @@
 	<list>
 	<algorithm>
 
-1686425065 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
+1686430470 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
 	<list>
 	"Polygon.h"
 	"Keyboard.h"

@@ -35,6 +35,8 @@ class Spaceship : public Polygon{
     list<Bullet*> ammunition;
     list<Bullet*> firedBullets;
 
+    int nLifes;
+
     void reloadAmmunition() {
         for (int i = 0; i < ammunitionSize; i++) {
             ammunition.push_back(new Bullet(5, 10, 10));
@@ -102,6 +104,7 @@ public:
         xDirection = 0;
         yDirection = 0;
         ammunitionSize = 90;
+        nLifes = 5;
         reloadAmmunition();
     }
 
@@ -223,6 +226,18 @@ public:
 
     void setSpeedUp(float speed_up) {
         this->speed_up = speed_up;
+    }
+
+    int getNLifes() {
+        return nLifes;
+    }
+
+    void decNLifes() {
+        nLifes--;
+    }
+
+    void incNLifes() {
+        nLifes++;
     }
 
     list<Bullet*> getShots() {

@@ -66,6 +66,14 @@ void printScore() {
    CV::rect(screenWidth - 200, 20, screenWidth - 20, 60);
 }
 
+void printPlayerLifes() {
+   string lifesText = "Lifes: " + to_string(spaceship->getNLifes());
+
+   CV::color(1, 1, 1);
+   CV::text(40, 45, lifesText.c_str());
+   CV::rect(20, 20, 200, 60);
+}
+
 void gameOver() {
    printf("\nVocê perdeu!\n");
    //exit(0);
@@ -98,8 +106,11 @@ void handleEnemiesShotsCollision() {
    for (Bullet* shot : shots) {
       if (spaceship->checkBulletCollision(shot)) {
          enemiesController->removeShot(shot);
-         gameOver();
-         //lida com a colisão
+         spaceship->decNLifes();
+
+         if (spaceship->getNLifes() == 0) {
+            gameState = GAME_OVER;
+         }
       }
    }
 }
@@ -117,8 +128,19 @@ void handleEnemiesSpawn() {
    }
 }
 
+void handlePlayerMapCollision() {
+   if (map->checkSpaceshipCollision(spaceship)) {
+      spaceship->decNLifes();
+         
+      if (spaceship->getNLifes() == 0) {
+         gameState = GAME_OVER;
+      }
+   }
+}
+
 void handleRunningGame() {
    handleMapMovement();
+   handlePlayerMapCollision();
    handleEnemiesShooting();
    handlePlayerShotsCollision();
    handleEnemiesShotsCollision();
@@ -129,6 +151,7 @@ void handleRunningGame() {
    enemiesController->render();
 
    printScore();
+   printPlayerLifes();
 }
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
@@ -144,9 +167,8 @@ void render()
       handleRunningGame();
    }
 
-   if (map->checkSpaceshipCollision(spaceship)) {
+   if (gameState == GAME_OVER) {
       gameOver();
-      //lida com a colisão
    }
 
    fpsControl->limitRefreshRate();
