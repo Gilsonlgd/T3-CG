@@ -178,6 +178,7 @@ void handleRunningGame() {
 
    printScore();
    printPlayerLifes();
+   printFrameRate();
 }
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
@@ -199,7 +200,6 @@ void render()
 
    fpsControl->limitRefreshRate();
    deltaTime = fpsControl->getDeltaTime();
-   printFrameRate();
 }
 
 void handleStarshipMovement() {

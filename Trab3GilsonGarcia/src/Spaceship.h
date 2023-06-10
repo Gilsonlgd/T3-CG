@@ -113,7 +113,7 @@ public:
         xDirection = 0;
         yDirection = 0;
         ammunitionSize = 90;
-        nLifes = 1;
+        nLifes = 5;
         invulnerable = false;
         canMoveToLeft = true;
         canMoveToRight = true;
