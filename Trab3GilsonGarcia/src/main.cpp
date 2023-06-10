@@ -46,6 +46,7 @@ int opcao  = 50;
 int screenWidth = 1200, screenHeight = 700; //largura e altura inicial da tela . Alteram com o redimensionamento de tela.
 int mouseX, mouseY;           //variaveis globais do mouse para poder exibir dentro da render().
 int gameState;
+float deltaTime;
 
 
 void gameOver() {
@@ -54,8 +55,9 @@ void gameOver() {
 }
 
 void handleMapMovement() {
-   map->move(spaceship->getSpeed());
-   enemiesController->move(spaceship->getSpeed());
+   map->move(spaceship->getSpeed() * deltaTime);
+   enemiesController->move(spaceship->getSpeed(), deltaTime);
+   spaceship->move(deltaTime);
 }
 
 void handleEnemiesShooting() {
@@ -136,6 +138,7 @@ void render()
    }
 
    fpsControl->limitRefreshRate();
+   deltaTime = fpsControl->getDeltaTime();
    printFrameRate();
 }
 

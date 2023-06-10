@@ -48,11 +48,19 @@ class Enemy : public Polygon{
     void renderBullets() {
         if (firedBullets.size()) {
             for (auto bullet : firedBullets) {
+                bullet->render();
+            }
+        }
+    }
+
+    void moveBullets(float deltaTime) {
+        if (firedBullets.size()) {
+            for (auto bullet : firedBullets) {
                 if (bullet->getSpeed() != ySpeed + bulletSpeed) {
                     bullet->setSpeed(ySpeed + bulletSpeed);
                 }
 
-                bullet->render();
+                bullet->move(deltaTime);
 
                 if (bullet->getBulletY() > 900) {
                     firedBullets.remove(bullet);
@@ -183,7 +191,9 @@ public:
         firedBullets.remove(bullet);
     }
 
-    void move(float ySpeed) {
+    void move(float ySpeed, float deltaTime) {
+        moveBullets(deltaTime);
+        
         if (curXTranslation <= 0) {
             xDirection = 1;
         } else if (curXTranslation >= maxXrange) {
@@ -191,13 +201,13 @@ public:
         }
 
         if (xDirection == 1) {
-            curXTranslation += xSpeed;
+            curXTranslation += xSpeed * deltaTime;
         } else {
-            curXTranslation -= xSpeed;
+            curXTranslation -= xSpeed * deltaTime;
         }
         
         this->ySpeed = ySpeed;
-        translateBy(xSpeed * xDirection, ySpeed);
+        translateBy(xSpeed * xDirection * deltaTime, ySpeed * deltaTime);
     }
 
     bool checkBulletCollision(Bullet* bullet) {

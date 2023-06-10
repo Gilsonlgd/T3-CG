@@ -81,9 +81,9 @@ public:
         }
     }
 
-    void move(float speed) {
+    void move(float speed, float deltaTime) {
         for (Enemy* enemy : enemies) {
-            enemy->move(speed);
+            enemy->move(speed, deltaTime);
             if (enemy->getY() > windowHeight + 100) {
                 enemies.remove(enemy);
                 delete enemy;

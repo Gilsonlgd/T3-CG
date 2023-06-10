@@ -54,6 +54,19 @@ class Spaceship : public Polygon{
         }
     }
 
+    void moveBullets(float deltaTime) {
+        if (firedBullets.size()) {
+            for (auto bullet : firedBullets) {
+                bullet->move(deltaTime);
+
+                if (bullet->getBulletY() < -10) {
+                    firedBullets.remove(bullet);
+                    delete bullet;
+                }
+            }
+        }
+    }
+
     void handleSpeedUp() {
         if (accelerating != 0) {
             if (speed < maxSpeed && accelerating == 1) {
@@ -95,11 +108,6 @@ public:
     virtual void render() override {
         renderBullets();
 
-        handleSpeedUp();
-        if (isMoving) {
-            translateBy(xDirection * 4, 0);
-        }
-
         CV::translate(0, 0);
         if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 213.0/265, 1);
         else if (colorScale == INDEX14)  CV::color(indexColor);
@@ -107,7 +115,15 @@ public:
         CV::polygonFill(vx.data(), vy.data(), nPoints);
 
     }
-    
+
+    void move(float deltaTime) {
+        handleSpeedUp();
+        moveBullets(deltaTime);
+        if (isMoving) {
+            translateBy(xDirection * 4 * deltaTime, 0);
+        }
+    }
+
     void startMove(int direction) {
         switch (direction) {
             case DOWN:

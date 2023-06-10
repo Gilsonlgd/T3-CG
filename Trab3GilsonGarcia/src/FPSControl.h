@@ -8,6 +8,7 @@ class FPSControl {
     int maxFrameRate;
     double actualFrameRate;
     chrono::milliseconds frameDelay;
+    chrono::milliseconds deltaTime;
     chrono::steady_clock::time_point priorTime;
     chrono::steady_clock::time_point presentTime;
 public:
@@ -30,10 +31,15 @@ public:
         priorTime = presentTime; 
 
         float elapsedSeconds = elapsedTime.count() / 1000.0f;
+        deltaTime = elapsedTime;
         actualFrameRate = 1.0f / elapsedSeconds;
     }
 
     float getActualFrameRate() {
         return actualFrameRate;
+    }
+
+    float getDeltaTime() {
+        return deltaTime.count() / 16;
     }
 };

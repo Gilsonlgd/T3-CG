@@ -32,10 +32,12 @@ public:
             else if (colorScale == INDEX14)  CV::color(indexColor);
 
             CV::polygonFill(vx.data(), vy.data(), 4);
-            translateBy(speed * xDirection, speed * yDirection);
         }
     }
 
+    void move(float deltaTime) {
+        translateBy(speed * xDirection * deltaTime, speed * yDirection * deltaTime);
+    }
     void fireBullet(float x, float y) {
         float offsetX = width/2;
         translateTo(x - offsetX, y);
