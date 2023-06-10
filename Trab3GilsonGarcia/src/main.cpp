@@ -47,6 +47,12 @@ int screenWidth = 1200, screenHeight = 700; //largura e altura inicial da tela .
 int mouseX, mouseY;           //variaveis globais do mouse para poder exibir dentro da render().
 int gameState;
 
+
+void gameOver() {
+   printf("\nVocê perdeu!\n");
+   //exit(0);
+}
+
 void handleMapMovement() {
    map->move(spaceship->getSpeed());
    enemiesController->move(spaceship->getSpeed());
@@ -58,6 +64,18 @@ void handlePlayerShotsCollision() {
    for (Bullet* bullet : shots) {
       if (enemiesController->checkBulletCollision(bullet)) {
          spaceship->removeShot(bullet);
+      }
+   }
+}
+
+void handleEnemiesShotsCollision() {
+   list<Bullet*> shots = enemiesController->getShots();
+
+   for (Bullet* shot : shots) {
+      if (spaceship->checkBulletCollision(shot)) {
+         enemiesController->removeShot(shot);
+         gameOver();
+         //lida com a colisão
       }
    }
 }
@@ -78,16 +96,12 @@ void handleEnemiesSpawn() {
 void handleRunningGame() {
    handleMapMovement();
    handlePlayerShotsCollision();
+   handleEnemiesShotsCollision();
    handleEnemiesSpawn();
 
    map->render();
    spaceship->render();
    enemiesController->render();
-}
-
-void gameOver() {
-   printf("\nVocê perdeu!\n");
-   //exit(0);
 }
 
 void printFrameRate() {
@@ -113,6 +127,7 @@ void render()
 
    if (map->checkSpaceshipCollision(spaceship)) {
       gameOver();
+      //lida com a colisão
    }
 
    fpsControl->limitRefreshRate();

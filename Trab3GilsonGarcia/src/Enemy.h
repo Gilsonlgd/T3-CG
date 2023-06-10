@@ -47,7 +47,7 @@ class Enemy : public Polygon{
                 if (bullet->getSpeed() != ySpeed + bulletSpeed) {
                     bullet->setSpeed(ySpeed + bulletSpeed);
                 }
-                
+
                 bullet->render();
 
                 if (bullet->getBulletY() > 900) {
@@ -160,6 +160,14 @@ public:
 
     bool isAlive() {
         return alive;
+    }
+
+    list<Bullet*> getFiredBullets() {
+        return firedBullets;
+    }
+
+    void removeBullet(Bullet* bullet) {
+        firedBullets.remove(bullet);
     }
 
     void move(float ySpeed) {

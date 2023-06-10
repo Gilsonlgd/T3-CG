@@ -58,6 +58,14 @@ public:
         CV::polygonFill(vx.data(), vy.data(), 4);
     }
 
+    float getHeight() {
+        return height;
+    }
+
+    float getWidth() {
+        return width;
+    }
+
 };
 
 

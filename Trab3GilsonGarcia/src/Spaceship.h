@@ -158,6 +158,25 @@ public:
         }
     }
 
+    bool checkBulletCollision(Bullet* bullet) {
+        float bulletHeight = bullet->getHeight();
+        float bulletWidth = bullet->getWidth();
+
+        if (bullet->getBulletY() + bulletHeight < vy[1]) {
+            return false;
+        }
+
+        if (bullet->getBulletX() + bulletWidth < vx[0]) {
+            return false;
+        }
+
+        if (bullet->getBulletX() > vx[2]) {
+            return false;
+        }
+
+        return hasPolygonCollided(bullet->getVx(), bullet->getVy());
+    }
+
     float getHeight() {
         return height;
     }

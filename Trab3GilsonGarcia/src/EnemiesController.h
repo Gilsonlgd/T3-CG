@@ -124,6 +124,22 @@ public:
         return Y_AXIS_SPAWN;
     }
 
+    list<Bullet*> getShots() {
+        list<Bullet*> shots = list<Bullet*>();
+
+        for (Enemy* enemy : enemies) {
+            list<Bullet*> enemyShots = enemy->getFiredBullets();
+            shots.insert(shots.end(), enemyShots.begin(), enemyShots.end());
+        }
+        return shots;
+    }
+
+    void removeShot(Bullet* bullet) {
+        for (Enemy* enemy : enemies) {
+            enemy->removeBullet(bullet);
+        }
+    }
+
     chrono::steady_clock::time_point getLastWaveTime() {
         return lastWaveTime;
     }
