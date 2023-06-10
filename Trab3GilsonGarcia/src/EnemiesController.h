@@ -119,6 +119,10 @@ public:
         return Y_AXIS_SPAWN;
     }
 
+    list<Enemy*> getEnemies() {
+        return enemies;
+    }
+
     void handleEnemiesShooting(float x, float y) {
         chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
         if (currentTime - lastShotTime > shotsInterval) {

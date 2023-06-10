@@ -2,13 +2,17 @@
 #define SPACESHIP_H_INCLUDED
 
 #include <list>
+#include <chrono>
 #include "Polygon.h"
 #include "Keyboard.h"
 #include "Bullet.h"
+#include "Enemy.h"
 
 using namespace std;
 
+#define TIME_INVULNERABLE 3000
 #define SPEED_UP_INCREASE 0.04
+#define SPACESHIP_COLOR 233.0/265, 15.0/265, 213.0/265
 
 /*
 ##### Teclado #####
@@ -36,6 +40,11 @@ class Spaceship : public Polygon{
     list<Bullet*> firedBullets;
 
     int nLifes;
+    bool invulnerable;
+    chrono::steady_clock::time_point lastHitTime;
+
+    bool canMoveToLeft;
+    bool canMoveToRight;
 
     void reloadAmmunition() {
         for (int i = 0; i < ammunitionSize; i++) {
@@ -105,6 +114,9 @@ public:
         yDirection = 0;
         ammunitionSize = 90;
         nLifes = 5;
+        invulnerable = false;
+        canMoveToLeft = true;
+        canMoveToRight = true;
         reloadAmmunition();
     }
 
@@ -112,7 +124,9 @@ public:
         renderBullets();
 
         CV::translate(0, 0);
-        if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 213.0/265, 1);
+
+        if (invulnerable) CV::color(1, 1, 1, 1);
+        else if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 0.0/265, 1);
         else if (colorScale == INDEX14)  CV::color(indexColor);
 
         CV::polygonFill(vx.data(), vy.data(), nPoints);
@@ -122,8 +136,21 @@ public:
     void move(float deltaTime) {
         handleSpeedUp();
         moveBullets(deltaTime);
+
         if (isMoving) {
-            translateBy(xDirection * 4 * deltaTime, 0);
+            if (xDirection > 0  && canMoveToRight) {
+                translateBy(xDirection * 4 * deltaTime, 0);
+            } else if (xDirection < 0 && canMoveToLeft) {
+                translateBy(xDirection * 4 * deltaTime, 0);
+            }
+        }
+
+        if (invulnerable) {
+            chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
+            chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(currentTime - lastHitTime);
+            if (time_span.count() * 1000 > TIME_INVULNERABLE) {
+                invulnerable = false;
+            }
         }
     }
 
@@ -196,6 +223,34 @@ public:
         return hasPolygonCollided(bullet->getVx(), bullet->getVy());
     }
 
+    bool checkEnemyCollision(Enemy* enemy) {
+        float enemyHeight = enemy->getHeight();
+        float enemyWidth = enemy->getWidth();
+        
+        if (enemy->getY() + enemyHeight < vy[1]) {
+            return false;
+        }
+
+        if (enemy->getX() + enemyWidth < vx[0]) {
+            return false;
+        }
+
+        if (enemy->getX() - enemyWidth > vx[2]) {
+            return false;
+        }
+
+        return hasPolygonCollided(enemy->getVx(), enemy->getVy());
+    }
+
+    void setInvulnerable() {
+        this->invulnerable = true;
+        lastHitTime = chrono::steady_clock::now();
+    }
+
+    bool isInvulnerable() {
+        return invulnerable;
+    }
+
     float getHeight() {
         return height;
     }
@@ -240,6 +295,14 @@ public:
         nLifes++;
     }
 
+    void setCanMoveToLeft(bool canMoveToLeft) {
+        this->canMoveToLeft = canMoveToLeft;
+    }
+
+    void setCanMoveToRight(bool canMoveToRight) {
+        this->canMoveToRight = canMoveToRight;
+    }
+
     list<Bullet*> getShots() {
         return firedBullets;
     }
@@ -247,6 +310,14 @@ public:
     void removeShot(Bullet* bullet) {
         firedBullets.remove(bullet);
         delete bullet;
+    }
+
+    void translateBackwardsFromCollisionPointL(float collisionPointX) {
+        translateBy(collisionPointX - vx[0], 0);
+    }
+
+    void translateBackwardsFromCollisionPointR(float collisionPointX) {
+        translateBy(collisionPointX - vx[2], 0);
     }
 };
 

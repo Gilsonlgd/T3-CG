@@ -224,14 +224,21 @@ public:
         for (int i = 0; i < playerCollisionBitMapL.size(); i++) {
             
             if (spaceship->hasPointCollided(playerCollisionBitMapL[i]->x, playerCollisionBitMapL[i]->y)) {
+                spaceship->setCanMoveToLeft(false);
+                spaceship->translateBackwardsFromCollisionPointL(playerCollisionBitMapL[i]->x);
                 return true;
             }
 
             if (spaceship->hasPointCollided(playerCollisionBitMapR[i]->x, playerCollisionBitMapR[i]->y)) {
+                spaceship->setCanMoveToRight(false);
+                spaceship->translateBackwardsFromCollisionPointR(playerCollisionBitMapR[i]->x);
                 return true;
             }
         }
         
+        spaceship->setCanMoveToLeft(true);
+        spaceship->setCanMoveToRight(true);
+
         return false;
     }
 

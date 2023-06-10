@@ -105,9 +105,44 @@ void handleEnemiesShotsCollision() {
 
    for (Bullet* shot : shots) {
       if (spaceship->checkBulletCollision(shot)) {
-         enemiesController->removeShot(shot);
-         spaceship->decNLifes();
+         if (!spaceship->isInvulnerable()) {
+            enemiesController->removeShot(shot);
+            spaceship->decNLifes();
+            spaceship->setInvulnerable();
 
+            if (spaceship->getNLifes() == 0) {
+               gameState = GAME_OVER;
+            }
+         }
+      }
+   }
+}
+
+void handleEnemiesPlayerCollision() {
+   list<Enemy*> enemies = enemiesController->getEnemies();
+
+   for (Enemy* enemy : enemies) {
+      if (enemy->isAlive()) {
+         if (spaceship->checkEnemyCollision(enemy)) {
+            if (!spaceship->isInvulnerable()) {
+               spaceship->decNLifes();
+               spaceship->setInvulnerable();
+
+               if (spaceship->getNLifes() == 0) {
+                  gameState = GAME_OVER;
+               }
+            }
+         }
+      } 
+   }
+}
+
+void handlePlayerMapCollision() {   
+   if (map->checkSpaceshipCollision(spaceship)) {
+      if (!spaceship->isInvulnerable()) {
+         spaceship->decNLifes();
+         spaceship->setInvulnerable();
+            
          if (spaceship->getNLifes() == 0) {
             gameState = GAME_OVER;
          }
@@ -128,22 +163,13 @@ void handleEnemiesSpawn() {
    }
 }
 
-void handlePlayerMapCollision() {
-   if (map->checkSpaceshipCollision(spaceship)) {
-      spaceship->decNLifes();
-         
-      if (spaceship->getNLifes() == 0) {
-         gameState = GAME_OVER;
-      }
-   }
-}
-
 void handleRunningGame() {
    handleMapMovement();
    handlePlayerMapCollision();
    handleEnemiesShooting();
    handlePlayerShotsCollision();
    handleEnemiesShotsCollision();
+   handleEnemiesPlayerCollision();
    handleEnemiesSpawn();
 
    map->render();
