@@ -11,11 +11,14 @@ using namespace std;
 
 #define Y_AXIS_SPAWN -100.0
 #define SPEED_UP_INCREASE 0.04
+
 #define INITIAL_WAVE_INTERVAL 5000
-#define INITIAL_SHOTS_INTERVAL 1000
+#define INITIAL_SHOTS_INTERVAL 1500
+
 #define ENEMIES_WIDTH 30.0
 #define ENEMIES_HEIGHT 65.0
 #define ENEMIES_SPACING 50
+
 #define SPAWN_OFFSET 40
 
 /*
@@ -55,7 +58,7 @@ public:
         chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
         if (currentTime - lastShotTime > shotsInterval) {
             for (Enemy* enemy : enemies) {
-                enemy->shot();
+                if (enemy->isAlive()) enemy->shot();
             }
             lastShotTime = chrono::steady_clock::now();
         }
@@ -95,11 +98,12 @@ public:
 
     bool checkBulletCollision(Bullet* bullet) {
         for (Enemy* enemy : enemies) {
-            bool collided = enemy->checkBulletCollision(bullet);
-            if (collided) {
-                enemies.remove(enemy);
-                delete enemy;
-                return true;
+            if (enemy->isAlive()) {
+                bool collided = enemy->checkBulletCollision(bullet);
+                if (collided) {
+                    enemy->setAlive(false);
+                    return true;
+                }
             }
         }
     }

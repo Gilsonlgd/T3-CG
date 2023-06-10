@@ -11,6 +11,7 @@ using namespace std;
 
 #define SPEED_UP_INCREASE 0.04
 #define INITIAL_SPEED_X 1.5
+#define INITIAL_BULLET_SPEED 2.5
 
 /*
 ##### Teclado #####
@@ -19,6 +20,7 @@ Implementa controle do teclado
 */
 
 class Enemy : public Polygon{
+    bool alive;
     float height;
     float width;
 
@@ -35,12 +37,17 @@ class Enemy : public Polygon{
 
     float maxXrange;
     float curXTranslation;
+    float bulletSpeed;
 
     list<Bullet*> firedBullets;
 
     void renderBullets() {
         if (firedBullets.size()) {
             for (auto bullet : firedBullets) {
+                if (bullet->getSpeed() != ySpeed + bulletSpeed) {
+                    bullet->setSpeed(ySpeed + bulletSpeed);
+                }
+                
                 bullet->render();
 
                 if (bullet->getBulletY() > 900) {
@@ -71,6 +78,7 @@ public:
         this->height = height;
         this->width = width;
         this->maxXrange = maxXrange;
+        this->alive = true;
 
         colorScale = RGBA;
         indexColor = 0;
@@ -78,17 +86,20 @@ public:
         yDirection = 1;
         curXTranslation = 0;
         xSpeed = INITIAL_SPEED_X;
+        ySpeed = 0;
+        bulletSpeed = INITIAL_BULLET_SPEED;
     }
 
     virtual void render() override {
         renderBullets();
+        
+        if (alive) {
+            CV::translate(0, 0);
+            if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 213.0/265, 1);
+            else if (colorScale == INDEX14)  CV::color(indexColor);
 
-        CV::translate(0, 0);
-        if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 213.0/265, 1);
-        else if (colorScale == INDEX14)  CV::color(indexColor);
-
-        CV::polygonFill(vx.data(), vy.data(), nPoints);
-
+            CV::polygonFill(vx.data(), vy.data(), nPoints);
+        }
     }
     
     float getX() {
@@ -143,6 +154,14 @@ public:
         this->curXTranslation = curXTranslation;
     }
 
+    void setAlive(bool alive) {
+        this->alive = alive;
+    }
+
+    bool isAlive() {
+        return alive;
+    }
+
     void move(float ySpeed) {
         if (curXTranslation <= 0) {
             xDirection = 1;
@@ -156,6 +175,7 @@ public:
             curXTranslation -= xSpeed;
         }
         
+        this->ySpeed = ySpeed;
         translateBy(xSpeed * xDirection, ySpeed);
     }
 
@@ -176,10 +196,12 @@ public:
     }
 
     void shot() {
-        Bullet* bullet = new Bullet(5, 10, 10);
-        bullet->setYDirection(BULLET_DOWN);
-        bullet->fireBullet(vx[0], vy[0] + height);
-        firedBullets.push_back(bullet);
+        if (alive) {
+            Bullet* bullet = new Bullet(5, 10, ySpeed + bulletSpeed);
+            bullet->setYDirection(BULLET_DOWN);
+            bullet->fireBullet(vx[0], vy[0] + height);
+            firedBullets.push_back(bullet);
+        }
     }
 };
 

@@ -47,6 +47,14 @@ public:
         return vx[0];
     }
 
+    void setSpeed(float speed) {
+        this->speed = speed;
+    }
+    
+    float getSpeed() {
+        return speed;
+    }
+
     void setYDirection(int direction) {
         yDirection = direction;
     }
