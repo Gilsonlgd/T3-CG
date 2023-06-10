@@ -24,6 +24,7 @@
 #include "EnemiesController.h"
 #include "Map.h"
 #include "HomeScreen.h"
+#include "EndScreen.h"
 #include "FPSControl.h"
 
 #include "constants.h"
@@ -40,6 +41,7 @@ Spaceship *spaceship = NULL;
 Map *map = NULL;
 FPSControl* fpsControl = NULL;
 HomeScreen* homeScreen = NULL;
+EndScreen* endScreen = NULL;
 EnemiesController* enemiesController = NULL;
 
 //variavel global para selecao do que sera exibido na canvas.
@@ -72,11 +74,6 @@ void printPlayerLifes() {
    CV::color(1, 1, 1);
    CV::text(40, 45, lifesText.c_str());
    CV::rect(20, 20, 200, 60);
-}
-
-void gameOver() {
-   printf("\nVocê perdeu!\n");
-   //exit(0);
 }
 
 void handleMapMovement() {
@@ -112,6 +109,7 @@ void handleEnemiesShotsCollision() {
 
             if (spaceship->getNLifes() == 0) {
                gameState = GAME_OVER;
+               endScreen->setFinalScore(score);
             }
          }
       }
@@ -130,6 +128,7 @@ void handleEnemiesPlayerCollision() {
 
                if (spaceship->getNLifes() == 0) {
                   gameState = GAME_OVER;
+                  endScreen->setFinalScore(score);
                }
             }
          }
@@ -145,6 +144,7 @@ void handlePlayerMapCollision() {
             
          if (spaceship->getNLifes() == 0) {
             gameState = GAME_OVER;
+            endScreen->setFinalScore(score);
          }
       }
    }
@@ -194,7 +194,7 @@ void render()
    }
 
    if (gameState == GAME_OVER) {
-      gameOver();
+      endScreen->render();
    }
 
    fpsControl->limitRefreshRate();
@@ -252,11 +252,14 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
    if( state == 0 ) //clicou
    {
-      int state = homeScreen->checkButtonsClick(mouseX, mouseY);
+      int newGameState = -1;
 
-      if (state == START_GAME) {
+      if (gameState == STARTING_GAME) newGameState = homeScreen->checkButtonsClick(x, y);
+      else if (gameState == GAME_OVER) newGameState = endScreen->checkButtonsClick(x, y);
+
+      if (newGameState == START_GAME) {
          gameState = RUNNING_GAME;
-      } else if (state == EXIT_GAME) {
+      } else if (newGameState == EXIT_GAME) {
          exit(0);
       }
    }
@@ -269,6 +272,7 @@ int main(void)
    spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 2.5, 1);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
+   endScreen = new EndScreen(screenWidth, screenHeight, "Game Over");
    enemiesController = new EnemiesController(screenHeight);
    fpsControl = new FPSControl(60, chrono::steady_clock::now());
 
