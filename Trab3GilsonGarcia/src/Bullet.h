@@ -11,7 +11,9 @@ class Bullet : public Rectangle {
     float speed;
     float speed_up;
     bool isFired;
-    int yDirection;
+    float yDirection;
+    float xDirection;
+
 
 public: 
     Bullet(float width, float height, float speed) : Rectangle(0, 0) {
@@ -20,6 +22,7 @@ public:
         this->speed = speed;
         isFired = false;
         yDirection = BULLET_UP;
+        xDirection = 0;
     }
 
     void render() override {
@@ -29,7 +32,7 @@ public:
             else if (colorScale == INDEX14)  CV::color(indexColor);
 
             CV::polygonFill(vx.data(), vy.data(), 4);
-            translateBy(0, speed * yDirection);
+            translateBy(speed * xDirection, speed * yDirection);
         }
     }
 
@@ -55,8 +58,17 @@ public:
         return speed;
     }
 
-    void setYDirection(int direction) {
+    void setYDirection(float direction) {
         yDirection = direction;
+    }
+
+    void setXDirection(float direction) {
+        xDirection = direction;
+    }
+
+    void rotateBullet(float angle) {
+        rotatePoints(vx.data(), vy.data(), nPoints, vx[3], vy[3], angle);
+        this->angle = angle;
     }
 
     vector<float> getVx() {

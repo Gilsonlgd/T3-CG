@@ -35,6 +35,10 @@ class Enemy : public Polygon{
     int yDirection;
     int indexColor;
 
+    float rBullet;
+    float gBullet;
+    float bBullet;
+
     float maxXrange;
     float curXTranslation;
     float bulletSpeed;
@@ -88,6 +92,9 @@ public:
         xSpeed = INITIAL_SPEED_X;
         ySpeed = 0;
         bulletSpeed = INITIAL_BULLET_SPEED;
+        r = 0.5;
+        g = 0.5;
+        b = 0.5;
     }
 
     virtual void render() override {
@@ -95,7 +102,7 @@ public:
         
         if (alive) {
             CV::translate(0, 0);
-            if (colorScale == RGBA) CV::color(233.0/265, 15.0/265, 213.0/265, 1);
+            if (colorScale == RGBA) CV::color(r, g, b, 1);
             else if (colorScale == INDEX14)  CV::color(indexColor);
 
             CV::polygonFill(vx.data(), vy.data(), nPoints);
@@ -162,6 +169,12 @@ public:
         return alive;
     }
 
+    void setBulletColor(float r, float g, float b) {
+        rBullet = r;
+        gBullet = g;
+        bBullet = b;
+    }
+
     list<Bullet*> getFiredBullets() {
         return firedBullets;
     }
@@ -206,9 +219,50 @@ public:
     void shot() {
         if (alive) {
             Bullet* bullet = new Bullet(5, 10, ySpeed + bulletSpeed);
+            bullet->setColor(rBullet, gBullet, bBullet);
             bullet->setYDirection(BULLET_DOWN);
             bullet->fireBullet(vx[0], vy[0] + height);
             firedBullets.push_back(bullet);
+        }
+    }
+
+    void shotTo(float x, float y) {
+        if (alive) {
+            Math_Vector* v1 = new Math_Vector();
+            Math_Vector* v2 = new Math_Vector();
+            Math_Vector* unit = new Math_Vector();
+
+            v1->x = x - vx[0];
+            v1->y = y - vy[0] + height;
+
+            v2->x = vx[0];
+            v2->y = y;
+
+            float magnitude = calculateMagnitude(v1->x, v1->y);
+            unit->x = v1->x / magnitude;
+            unit->y = v1->y / magnitude;
+            float ang = angleDEG(v1->x, v1->y, v2->x, v2->y);
+            /*rotatePoints(vx.data(), vy.data(), nPoints, getCenterX(), getCenterY(), -angle);
+            rotatePoints(vx.data(), vy.data(), nPoints, getCenterX(), getCenterY(), ang);
+            this->angle = ang;*/
+
+
+            Bullet* bullet = new Bullet(5, 10, ySpeed + bulletSpeed);
+            bullet->setColor(rBullet, gBullet, bBullet);
+
+            if (ang > -90 && ang < 90) {
+                bullet->setXDirection(unit->x);
+                bullet->setYDirection(unit->y);
+            } else {
+                bullet->setXDirection(0);
+                bullet->setYDirection(BULLET_DOWN);
+            }
+            
+            //bullet->rotateBullet(ang);
+
+            bullet->fireBullet(vx[0], vy[0] + height);
+            firedBullets.push_back(bullet);
+
         }
     }
 };

@@ -186,7 +186,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686348628 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686422411 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -210,13 +210,13 @@
 	<list>
 	<algorithm>
 
-1686348719 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
+1686422357 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
 	<list>
 	"Polygon.h"
 	"Keyboard.h"
 	"Bullet.h"
 
-1686272184 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
+1686416573 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
 	<vector>
 	<cmath>
 	<iostream>
@@ -227,16 +227,17 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\constants.h
 
-1686071680 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
+1686420019 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
 	<vector>
 	<math.h>
 	<random>
 	<ctime>
+	"constants.h"
 
-1686355447 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
+1686422542 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
 	"Rectangle.h"
 
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\rectangle.h
+1686356327 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\rectangle.h
 	"Polygon.h"
 	"constants.h"
 
@@ -250,12 +251,12 @@
 	<ctime>
 	"Spaceship.h"
 
-1686251733 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
+1686422401 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
 	<iostream>
 	<chrono>
 	<thread>
 
-1686268345 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
+1686419585 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
 
 1686245264 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\homescreen.h
@@ -269,14 +270,14 @@
 	"gl_canvas2d.h"
 	"constants.h"
 
-1686355470 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemy.h
+1686422672 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemy.h
 	<list>
 	"stdio.h"
 	"Polygon.h"
 	"Keyboard.h"
 	"Bullet.h"
 
-1686355613 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
+1686420323 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
 	<list>
 	"stdio.h"
 	"Enemy.h"

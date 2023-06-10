@@ -58,6 +58,10 @@ void handleMapMovement() {
    enemiesController->move(spaceship->getSpeed());
 }
 
+void handleEnemiesShooting() {
+   enemiesController->handleEnemiesShooting(spaceship->getCenterX(), spaceship->getCenterY());
+}
+
 void handlePlayerShotsCollision() {
    list<Bullet*> shots = spaceship->getShots();
 
@@ -95,6 +99,7 @@ void handleEnemiesSpawn() {
 
 void handleRunningGame() {
    handleMapMovement();
+   handleEnemiesShooting();
    handlePlayerShotsCollision();
    handleEnemiesShotsCollision();
    handleEnemiesSpawn();

@@ -107,7 +107,7 @@ public:
         CV::polygonFill(vx.data(), vy.data(), nPoints);
 
     }
-
+    
     void startMove(int direction) {
         switch (direction) {
             case DOWN:

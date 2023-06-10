@@ -12,13 +12,14 @@ using namespace std;
 #define Y_AXIS_SPAWN -100.0
 #define SPEED_UP_INCREASE 0.04
 
-#define INITIAL_WAVE_INTERVAL 5000
-#define INITIAL_SHOTS_INTERVAL 1500
+#define INITIAL_WAVE_INTERVAL 7000
+#define INITIAL_SHOTS_INTERVAL 3000
 
 #define ENEMIES_WIDTH 30.0
 #define ENEMIES_HEIGHT 65.0
 #define ENEMIES_SPACING 50
-
+#define ENEMIES_COLOR 212.0/255, 234.0/255, 5.0/255
+#define ENEMIES_BULLET_COLOR 0.0/255, 249.0/255, 26.0/255
 #define SPAWN_OFFSET 40
 
 /*
@@ -54,14 +55,6 @@ public:
         for (Enemy* enemy : enemies) {
             enemy->render();
         }
-
-        chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
-        if (currentTime - lastShotTime > shotsInterval) {
-            for (Enemy* enemy : enemies) {
-                if (enemy->isAlive()) enemy->shot();
-            }
-            lastShotTime = chrono::steady_clock::now();
-        }
     }
 
     void spawnEnemiesWave(float xStart, float xEnd, chrono::steady_clock::time_point currentTime) {
@@ -81,6 +74,8 @@ public:
         for (int i = 0; i < nEnemies; i++) {
             Enemy* enemy = new Enemy(xRangeStart + SPAWN_OFFSET + i * (ENEMIES_WIDTH + ENEMIES_SPACING), Y_AXIS_SPAWN, ENEMIES_WIDTH, ENEMIES_HEIGHT, xRange);
             enemy->setCurrentXTranslation(curXTranslation);
+            enemy->setColor(ENEMIES_COLOR);
+            enemy->setBulletColor(ENEMIES_BULLET_COLOR);
             enemies.push_back(enemy);
             lastWaveTime = currentTime;
         }
@@ -122,6 +117,16 @@ public:
 
     float getYAxisSpawn() {
         return Y_AXIS_SPAWN;
+    }
+
+    void handleEnemiesShooting(float x, float y) {
+        chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
+        if (currentTime - lastShotTime > shotsInterval) {
+            for (Enemy* enemy : enemies) {
+                if (enemy->isAlive()) enemy->shotTo(x, y);
+            }
+            lastShotTime = chrono::steady_clock::now();
+        }
     }
 
     list<Bullet*> getShots() {

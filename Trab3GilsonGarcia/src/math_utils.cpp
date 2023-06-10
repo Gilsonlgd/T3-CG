@@ -48,3 +48,66 @@ float randomFloat(float min, float max) {
     uniform_real_distribution<float> dist(min, max);
     return dist(rng);
 }
+
+// calcula a distancia entre dois pontos
+// pode ser visto também como o módulo de um vetor
+float dist(float x1, float y1, float x2, float y2) {
+    return sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
+}
+
+// retorna o angulo entre dois vetores (x1, y1) e (x2, y2) em graus
+float angleDEG(float x1, float y1, float x2, float y2) {
+    return (atan2(y1, x1) - atan2(y2, x2)) * 180.0 / PI;
+}
+
+// rotaciona em angle um ponto (x1, y1) com relação a um pivot
+// recebe o angle em graus e transforma para RAD
+void rotatePoint(float& x1, float& y1, float pivotX, float pivotY, float angle) {
+    // Converte o ângulo para radianos
+    float rad = (angle) * PI / 180.0;
+    float rotMatrix[2][2] = {{cos(rad), -sin(rad)}, {sin(rad), cos(rad)}};
+
+    x1 -= pivotX;
+    y1 -= pivotY;
+
+    // Rotaciona o ponto utilizando a matriz de rotação
+    float newX = x1 * rotMatrix[0][0] + y1 * rotMatrix[0][1];
+    float newY = x1 * rotMatrix[1][0] + y1 * rotMatrix[1][1];
+
+    x1 = newX;
+    y1 = newY;
+
+    // Translada o ponto de volta para a sua posição original
+    x1 += pivotX;
+    y1 += pivotY;
+}
+
+// rotaciona em angle os pontos da figura com relação a um pivot
+// recebe o angle em graus e transforma para RAD
+void rotatePoints(float* vx, float* vy, int nPoints, float pivotX, float pivotY, float angle) {
+    // Converte o ângulo para radianos
+    float rad = (angle) * PI / 180.0;
+
+    float rotMatrix[2][2] = {{cos(rad), -sin(rad)}, {sin(rad), cos(rad)}};
+
+    for (int i = 0; i < nPoints; i++) {
+        // Translada o ponto para o ponto de pivot
+        vx[i] -= pivotX;
+        vy[i] -= pivotY;
+
+        // Rotaciona o ponto utilizando a matriz de rotação
+        float x = vx[i] * rotMatrix[0][0] + vy[i] * rotMatrix[0][1];
+        float y = vx[i] * rotMatrix[1][0] + vy[i] * rotMatrix[1][1];
+
+        vx[i] = x;
+        vy[i] = y;
+
+        // Translada o ponto de volta para a sua posição original
+        vx[i] += pivotX;
+        vy[i] += pivotY;
+    }
+}
+
+float calculateMagnitude(float x, float y) {
+    return sqrt(x * x + y * y);
+}

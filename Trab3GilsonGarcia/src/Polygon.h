@@ -91,10 +91,12 @@ public:
         this->r = r;
         this->g = g;
         this->b = b;
+        colorScale = RGBA;
     }
 
     void setColor(int index) {
         indexColor = index;
+        colorScale = INDEX14;
     }
 
     float getColorR() {
