@@ -46,12 +46,7 @@
 		<Unit filename="include/GL/glut.h" />
 		<Unit filename="src/Botao.h" />
 		<Unit filename="src/Bullet.h" />
-		<Unit filename="src/Circulo.h" />
-		<Unit filename="src/ColorPicker.h" />
-		<Unit filename="src/Export.h" />
 		<Unit filename="src/FPSControl.h" />
-		<Unit filename="src/Figura.h" />
-		<Unit filename="src/Import.h" />
 		<Unit filename="src/Keyboard.h" />
 		<Unit filename="src/Map.h" />
 		<Unit filename="src/Polygon.h" />

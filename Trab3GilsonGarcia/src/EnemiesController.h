@@ -23,9 +23,11 @@ using namespace std;
 #define SPAWN_OFFSET 40
 
 /*
-##### Teclado #####
-Implementa controle do teclado
-######################
+##### ENEMIES CONTROLLER #####
+Implementa controle dos inimigos,
+como spawn, movimentação, colisão ]
+e tiros.
+##############################
 */
 
 class EnemiesController{

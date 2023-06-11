@@ -17,6 +17,16 @@
 
 using namespace std;
 
+/*
+##### MAP #####
+Implementa o mapa do jogo, 
+e suas estrelas. Movimentação
+e colisão com as curvas 
+acontem aqui.
+######################
+*/
+
+
 class Map {
     vector<float> vx, vy;
 

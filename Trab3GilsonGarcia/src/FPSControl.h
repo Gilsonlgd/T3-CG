@@ -6,6 +6,15 @@
 
 using namespace std;
 
+/*
+##### FPSCONTROL #####
+Implementa o controle de FPS,
+como limitar FPS max, calcular 
+FPS atual e calcular deltaTime
+######################
+*/
+
+
 class FPSControl {
     int maxFrameRate;
     double actualFrameRate;

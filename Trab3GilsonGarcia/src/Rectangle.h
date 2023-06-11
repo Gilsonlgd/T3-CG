@@ -12,7 +12,6 @@
 /*
 ##### RETÂNGULO #####
 Este retângulo foi implementado utilizando polígono.
-Todos os métodos de translação e rotação são orientados a isso
 ######################
 */
 
@@ -42,7 +41,6 @@ public:
     using Polygon::setVisible;
 
     Rectangle(float x, float y) : Polygon(4) {
-        ID = RECT_ID;
         width = 5;
         height = 10;
         vx[0] = x;

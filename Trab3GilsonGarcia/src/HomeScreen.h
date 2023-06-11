@@ -17,6 +17,14 @@
 
 using namespace std;
 
+/*
+##### HOMESCREEN #####
+Implementa a tela inicial, 
+com os botões de start e exit
+######################
+*/
+
+
 class HomeScreen {
     float screenWidth;
     float screenHeight;

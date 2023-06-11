@@ -11,10 +11,17 @@
 
 using namespace std;
 
+/*
+##### Polygon #####
+Implementa um polígono
+de n lados.
+######################
+*/
+
+
 class Polygon {
 protected:
-    int ID;
-    bool visible, selected, resizing, rotating;
+    bool visible;
 
     int nPoints;
     vector<float> vx, vy;
@@ -123,10 +130,6 @@ public:
         return angle;
     }
 
-    int getType() {
-        return ID;
-    }
-
     vector<float> getVx() {
         return vx;
     }
@@ -144,13 +147,6 @@ public:
 
     bool isVisible() {
         return visible;
-    }
-
-    void setRotating(bool value) {
-        rotating = value;
-    }
-    bool isRotating() {
-        return rotating;
     }
 
     // Algorimo Ray Casting de detecção de colisão.
@@ -173,30 +169,25 @@ public:
 
     // Algoritmo SAT de detecção de colisão
      bool hasPolygonCollided(const vector<float>& vx1, const vector<float>& vy1) {
-        // Concatenate the vertices of both polygons
         vector<float> combinedVx = vx;
         vector<float> combinedVy = vy;
         combinedVx.insert(combinedVx.end(), vx1.begin(), vx1.end());
         combinedVy.insert(combinedVy.end(), vy1.begin(), vy1.end());
 
-        // Perform the SAT check
+        
         for (int i = 0; i < nPoints; i++) {
             int nextIndex = (i + 1) % nPoints;
 
-            // Get the edge vector
             float edgeX = vx[i] - vx[nextIndex];
             float edgeY = vy[i] - vy[nextIndex];
 
-            // Calculate the perpendicular vector
             float perpendicularX = -edgeY;
             float perpendicularY = edgeX;
 
-            // Normalize the perpendicular vector
             float magnitude = sqrt(perpendicularX * perpendicularX + perpendicularY * perpendicularY);
             perpendicularX /= magnitude;
             perpendicularY /= magnitude;
 
-            // Project the vertices onto the perpendicular vector
             float minProjectionA = FLT_MAX;
             float maxProjectionA = -FLT_MAX;
             float minProjectionB = FLT_MAX;
@@ -213,15 +204,11 @@ public:
                     maxProjectionB = max(maxProjectionB, projection);
                 }
             }
-
-            // Check for overlap
             if (!(maxProjectionB >= minProjectionA && maxProjectionA >= minProjectionB)) {
-                // The projections do not overlap, so the polygons are not colliding
                 return false;
             }
         }
 
-        // All projections overlap, so the polygons are colliding
         return true;
     }
 

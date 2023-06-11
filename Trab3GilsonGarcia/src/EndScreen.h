@@ -17,6 +17,13 @@
 
 using namespace std;
 
+/*
+##### ENDSCREEN #####
+Representa a tela de game over
+######################
+*/
+
+
 class EndScreen {
     float screenWidth;
     float screenHeight;

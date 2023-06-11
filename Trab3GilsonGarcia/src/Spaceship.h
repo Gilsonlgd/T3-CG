@@ -16,7 +16,7 @@ using namespace std;
 
 /*
 ##### Teclado #####
-Implementa controle do teclado
+Implementa a nave do jogador.
 ######################
 */
 

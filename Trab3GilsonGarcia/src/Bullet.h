@@ -7,6 +7,15 @@
 
 using namespace std;
 
+/*
+##### BULLET #####
+Representa uma bala que pode ser 
+atirada. Usada pelo player e pelos
+inimigos.
+######################
+*/
+
+
 class Bullet : public Rectangle {
     float speed;
     float speed_up;

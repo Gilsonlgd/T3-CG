@@ -14,8 +14,9 @@ using namespace std;
 #define INITIAL_BULLET_SPEED 2.5
 
 /*
-##### Teclado #####
-Implementa controle do teclado
+##### ENEMY #####
+Implementa um inimigo,
+que é um polígono de 5 lados.
 ######################
 */
 
