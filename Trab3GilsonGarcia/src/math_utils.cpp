@@ -111,3 +111,13 @@ void rotatePoints(float* vx, float* vy, int nPoints, float pivotX, float pivotY,
 float calculateMagnitude(float x, float y) {
     return sqrt(x * x + y * y);
 }
+
+// avalia bezier de grau 2
+float evaluateBezier2(float p1, float p2, float p3, float t) {
+    return p1 * pow((1 - t), 2) + p2 * (2 * t * (1 - t)) + p3 * pow(t, 2);
+}
+
+// avalia bezier de grau 3
+float evaluateBezier3(float p1, float p2, float p3, float p4, float t) {
+    return p1 * pow((1 - t), 3) + p2 * (3 * t * pow((1 - t), 2)) + p3 * (3 * pow(t, 2) * (1 - t)) + p4 * pow(t, 3);
+}

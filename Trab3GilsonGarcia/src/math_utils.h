@@ -34,6 +34,10 @@ void projectPolygon(const vector<float>& vertices, float axisX, float axisY, flo
 
 float evaluateBSpline(float p1, float p2, float p3, float p4, float t);
 
+float evaluateBezier3(float p1, float p2, float p3, float p4, float t);
+
+float evaluateBezier2(float p1, float p2, float p3, float t);
+
 float randomFloat(float min, float max);
 
 float dist(float x1, float y1, float x2, float y2);

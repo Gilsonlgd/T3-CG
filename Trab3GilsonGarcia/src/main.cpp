@@ -102,9 +102,15 @@ void handleEnemiesShotsCollision() {
    list<Bullet*> shots = enemiesController->getShots();
 
    for (Bullet* shot : shots) {
+      if (spaceship->checkShieldCollision(shot)) {
+         enemiesController->removeShot(shot);
+         continue;
+      }
+
       if (spaceship->checkBulletCollision(shot)) {
+
          if (!spaceship->isInvulnerable()) {
-            enemiesController->removeShot(shot);
+            
             spaceship->decNLifes();
             spaceship->setInvulnerable();
 
@@ -122,6 +128,11 @@ void handleEnemiesPlayerCollision() {
 
    for (Enemy* enemy : enemies) {
       if (enemy->isAlive()) {
+         if (spaceship->checkShieldCollision(enemy)) {
+            enemy->setAlive(false);
+            continue;
+         }
+
          if (spaceship->checkEnemyCollision(enemy)) {
             if (!spaceship->isInvulnerable()) {
                spaceship->decNLifes();
@@ -132,6 +143,8 @@ void handleEnemiesPlayerCollision() {
                   endScreen->setFinalScore(score);
                }
             }
+
+            enemy->setAlive(false);
          }
       } 
    }
@@ -223,6 +236,7 @@ void keyboard(int key)
 
    kbd->startPressKey(key);
    if (kbd->isPressed(SPACE)) spaceship->shot();
+   if (kbd->isPressed(CTRL)) spaceship->activateShield();
    
    handleStarshipMovement();
 }
@@ -273,7 +287,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 4, 2);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 5, 3);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
    endScreen = new EndScreen(screenWidth, screenHeight, "Game Over");

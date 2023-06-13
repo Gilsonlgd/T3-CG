@@ -13,7 +13,7 @@ using namespace std;
 #define SPEED_UP_INCREASE 0.04
 
 #define INITIAL_WAVE_INTERVAL 7000
-#define INITIAL_SHOTS_INTERVAL 3000
+#define INITIAL_SHOTS_INTERVAL 2500
 #define MIN_SHOTS_INTERVAL 1000
 #define MIN_SPAWN_INTERVAL 3000 
 #define MIN_ENEMIES_PER_WAVE 3
@@ -74,7 +74,7 @@ public:
         float xRange = intervalLen - totalEnemiesWidth;
         float xRangeStart = randomFloat(xStart, xStart + xRange);
         float curXTranslation = xRangeStart - xStart;
-        
+
 
         for (int i = 0; i < nEnemies; i++) {
             Enemy* enemy = new Enemy(xRangeStart + SPAWN_OFFSET + i * (ENEMIES_WIDTH + ENEMIES_SPACING), Y_AXIS_SPAWN, ENEMIES_WIDTH, ENEMIES_HEIGHT, xRange);
@@ -95,10 +95,10 @@ public:
     }
 
     void refreshMaxEnemiesPerWave(float score) {
-        if ( (int)score % 400 != 0) return;
+        if ( (int)score % 300 != 0) return;
         if (maxEnemiesPerWave >= 10) return;
 
-        maxEnemiesPerWave = MIN_ENEMIES_PER_WAVE + (int)(score / 400);
+        maxEnemiesPerWave = MIN_ENEMIES_PER_WAVE + (int)(score / 300);
     }
 
     void move(float speed, float deltaTime) {

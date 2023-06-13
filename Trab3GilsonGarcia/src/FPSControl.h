@@ -48,6 +48,7 @@ public:
 
         chrono::milliseconds elapsedTimeBetweenFPSCapture = chrono::duration_cast<chrono::milliseconds>(presentTime - lastFrameRateCapture);
         chrono::milliseconds timeBetweenFPSCapture = chrono::milliseconds(TIME_BETWEEN_FPS_CAPTURE);
+        
         if (elapsedTimeBetweenFPSCapture > timeBetweenFPSCapture) {
             actualFrameRate = 1.0f / elapsedSeconds;
             lastFrameRateCapture = presentTime;

@@ -7,6 +7,7 @@
 #include "Keyboard.h"
 #include "Bullet.h"
 #include "Enemy.h"
+#include "Shield.h"
 
 using namespace std;
 
@@ -42,6 +43,8 @@ class Spaceship : public Polygon{
     int nLifes;
     bool invulnerable;
     chrono::steady_clock::time_point lastHitTime;
+
+    Shield* shield;
 
     bool canMoveToLeft;
     bool canMoveToRight;
@@ -117,11 +120,14 @@ public:
         invulnerable = false;
         canMoveToLeft = true;
         canMoveToRight = true;
+
+        shield = new Shield(vx[1], vy[1], base, height, 20);
         reloadAmmunition();
     }
 
     virtual void render() override {
         renderBullets();
+        shield->render();
 
         CV::translate(0, 0);
 
@@ -151,6 +157,10 @@ public:
             if (time_span.count() * 1000 > TIME_INVULNERABLE) {
                 invulnerable = false;
             }
+        }
+
+        if (shield->isActiveShield()) {
+            shield->refreshPosition(vx[1], vy[1]);
         }
     }
 
@@ -220,7 +230,24 @@ public:
             return false;
         }
 
+
         return hasPolygonCollided(bullet->getVx(), bullet->getVy());
+    }
+
+    bool checkShieldCollision(Bullet* bullet) {
+        if (shield->isActiveShield()) {
+            return shield->checkBulletCollision(bullet);
+        }
+
+        return false;
+    }
+
+    bool checkShieldCollision(Enemy* enemy) {
+        if (shield->isActiveShield()) {
+            return shield->checkEnemyCollision(enemy);
+        }
+
+        return false;
     }
 
     bool checkEnemyCollision(Enemy* enemy) {
@@ -249,6 +276,14 @@ public:
 
     bool isInvulnerable() {
         return invulnerable;
+    }
+
+    void activateShield() {
+        shield->activate();
+    }
+
+    bool isShieldActive() {
+        return shield->isActiveShield();
     }
 
     float getHeight() {

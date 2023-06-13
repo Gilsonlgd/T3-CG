@@ -197,7 +197,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686674870 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686683497 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -222,13 +222,14 @@
 	<list>
 	<algorithm>
 
-1686671198 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
+1686686006 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
 	<list>
 	<chrono>
 	"Polygon.h"
 	"Keyboard.h"
 	"Bullet.h"
 	"Enemy.h"
+	"Shield.h"
 
 1686492832 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
 	<vector>
@@ -241,7 +242,7 @@
 
 1686492654 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\constants.h
 
-1686492282 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
+1686682441 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
 	<vector>
 	<math.h>
 	<random>
@@ -265,12 +266,12 @@
 	<ctime>
 	"Spaceship.h"
 
-1686671875 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
+1686686522 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
 	<iostream>
 	<chrono>
 	<thread>
 
-1686419585 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
+1686679530 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
 
 1686492174 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\homescreen.h
@@ -291,7 +292,7 @@
 	"Keyboard.h"
 	"Bullet.h"
 
-1686675287 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
+1686686165 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
 	<list>
 	"stdio.h"
 	"Enemy.h"
@@ -338,4 +339,12 @@
 	"math_utils.h"
 	"Botao.h"
 	<string>
+
+1686686829 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\shield.h
+	"gl_canvas2d.h"
+	"bullet.h"
+	"math_utils.h"
+	"Enemy.h"
+	<vector>
+	<chrono>
 
