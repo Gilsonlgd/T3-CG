@@ -14,6 +14,8 @@ using namespace std;
 
 #define INITIAL_WAVE_INTERVAL 7000
 #define INITIAL_SHOTS_INTERVAL 3000
+#define MIN_SHOTS_INTERVAL 1000
+#define MIN_SPAWN_INTERVAL 3000 
 
 #define ENEMIES_WIDTH 30.0
 #define ENEMIES_HEIGHT 65.0
@@ -83,6 +85,14 @@ public:
         }
     }
 
+    void refreshSpawnInterval(float score) {
+        if ( (int)score % 100 != 0) return;
+        if (waveInterval <= chrono::milliseconds(MIN_SPAWN_INTERVAL)) return;
+
+        int decrease = (int)(score / 100) * 1000;
+        waveInterval = chrono::milliseconds(INITIAL_WAVE_INTERVAL - decrease);
+    }
+
     void move(float speed, float deltaTime) {
         for (Enemy* enemy : enemies) {
             enemy->move(speed, deltaTime);
@@ -135,6 +145,14 @@ public:
         }
     }
 
+    void refreshShotsInterval(float score) {
+        if ( (int)score % 100 != 0) return;
+        if (shotsInterval <= chrono::milliseconds(MIN_SHOTS_INTERVAL)) return;
+
+        int decrease = (int)(score / 100) * 50;
+        shotsInterval = chrono::milliseconds(INITIAL_SHOTS_INTERVAL - decrease);
+    }
+
     list<Bullet*> getShots() {
         list<Bullet*> shots = list<Bullet*>();
 
@@ -158,10 +176,6 @@ public:
     chrono::milliseconds getWaveInterval() {
         return waveInterval;
     }
-
-    /*void setWaveInterval(float milliseconds) {
-        this->waveInterval = chrono::milliseconds(milliseconds);
-    }*/
 };
 
 #endif // ENEMIESCONTROLER_H_INCLUDED

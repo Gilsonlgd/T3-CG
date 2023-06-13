@@ -84,6 +84,7 @@ void handleMapMovement() {
 
 void handleEnemiesShooting() {
    enemiesController->handleEnemiesShooting(spaceship->getCenterX(), spaceship->getCenterY());
+   enemiesController->refreshShotsInterval(score);
 }
 
 void handlePlayerShotsCollision() {
@@ -161,6 +162,8 @@ void handleEnemiesSpawn() {
       float xEnd = screenWidth - xStart;
       enemiesController->spawnEnemiesWave(xStart, xEnd, currentTime);
    }
+
+   enemiesController->refreshSpawnInterval(score);
 }
 
 void handleRunningGame() {
@@ -269,7 +272,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 2.5, 1);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 4, 2);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
    endScreen = new EndScreen(screenWidth, screenHeight, "Game Over");
