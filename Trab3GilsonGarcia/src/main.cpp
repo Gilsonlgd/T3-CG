@@ -277,7 +277,7 @@ int main(void)
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
    endScreen = new EndScreen(screenWidth, screenHeight, "Game Over");
    enemiesController = new EnemiesController(screenHeight);
-   fpsControl = new FPSControl(60, chrono::steady_clock::now());
+   fpsControl = new FPSControl(60.0f, chrono::steady_clock::now());
 
    map->setPlayerCollisionInterval(spaceship->getCenterY() - spaceship->getHeight()/2, spaceship->getCenterY() + spaceship->getHeight()/2);
    map->setEnemiesCollisionInterval(enemiesController->getYAxisSpawn(), enemiesController->getYAxisSpawn() + enemiesController->getEnemiesHeight());

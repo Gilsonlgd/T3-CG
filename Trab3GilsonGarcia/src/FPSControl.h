@@ -59,7 +59,7 @@ public:
     }
 
     float getDeltaTime() {
-        return deltaTime.count() / 16;
+        return (float)deltaTime.count() / 16.0f;
     }
     
 };

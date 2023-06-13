@@ -139,9 +139,9 @@ public:
 
         if (isMoving) {
             if (xDirection > 0  && canMoveToRight) {
-                translateBy(xDirection * 4 * deltaTime, 0);
+                translateBy(xDirection * 6 * deltaTime, 0);
             } else if (xDirection < 0 && canMoveToLeft) {
-                translateBy(xDirection * 4 * deltaTime, 0);
+                translateBy(xDirection * 6 * deltaTime, 0);
             }
         }
 
