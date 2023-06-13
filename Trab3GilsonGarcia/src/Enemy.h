@@ -246,34 +246,30 @@ public:
             v1->x = x - vx[0];
             v1->y = y - vy[0] + height;
 
-            v2->x = vx[0];
-            v2->y = y;
+            v2->x = vx[0] - vx[0];
+            v2->y = y - vy[0] + height;
 
             float magnitude = calculateMagnitude(v1->x, v1->y);
             unit->x = v1->x / magnitude;
             unit->y = v1->y / magnitude;
             float ang = angleDEG(v1->x, v1->y, v2->x, v2->y);
-            /*rotatePoints(vx.data(), vy.data(), nPoints, getCenterX(), getCenterY(), -angle);
-            rotatePoints(vx.data(), vy.data(), nPoints, getCenterX(), getCenterY(), ang);
-            this->angle = ang;*/
-
 
             Bullet* bullet = new Bullet(5, 10, ySpeed + bulletSpeed);
             bullet->setColor(rBullet, gBullet, bBullet);
 
-            if (ang > -90 && ang < 90) {
+            if (ang > -60 && ang < 60) {
                 bullet->setXDirection(unit->x);
                 bullet->setYDirection(unit->y);
+
+                float bulletAngle = angleDEG(0, 1, unit->x, unit->y);
+                bullet->rotateBullet(ang);
             } else {
                 bullet->setXDirection(0);
                 bullet->setYDirection(BULLET_DOWN);
             }
-            
-            //bullet->rotateBullet(ang);
 
             bullet->fireBullet(vx[0], vy[0] + height);
             firedBullets.push_back(bullet);
-
         }
     }
 };

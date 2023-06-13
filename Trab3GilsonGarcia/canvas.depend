@@ -197,7 +197,7 @@
 
 1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
 
-1686671799 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
+1686674870 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -284,14 +284,14 @@
 	"gl_canvas2d.h"
 	"constants.h"
 
-1686492008 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemy.h
+1686675419 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemy.h
 	<list>
 	"stdio.h"
 	"Polygon.h"
 	"Keyboard.h"
 	"Bullet.h"
 
-1686659103 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
+1686675287 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
 	<list>
 	"stdio.h"
 	"Enemy.h"

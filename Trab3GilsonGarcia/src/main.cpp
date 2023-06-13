@@ -164,6 +164,7 @@ void handleEnemiesSpawn() {
    }
 
    enemiesController->refreshSpawnInterval(score);
+   enemiesController->refreshMaxEnemiesPerWave(score);
 }
 
 void handleRunningGame() {

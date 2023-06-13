@@ -16,6 +16,7 @@ using namespace std;
 #define INITIAL_SHOTS_INTERVAL 3000
 #define MIN_SHOTS_INTERVAL 1000
 #define MIN_SPAWN_INTERVAL 3000 
+#define MIN_ENEMIES_PER_WAVE 3
 
 #define ENEMIES_WIDTH 30.0
 #define ENEMIES_HEIGHT 65.0
@@ -46,7 +47,7 @@ public:
     EnemiesController(float windowHeight) {
         enemies = list<Enemy*>();
         this->windowHeight = windowHeight;
-        maxEnemiesPerWave = 4;
+        maxEnemiesPerWave = MIN_ENEMIES_PER_WAVE;
 
         waveInterval = chrono::milliseconds(INITIAL_WAVE_INTERVAL);
         shotsInterval = chrono::milliseconds(INITIAL_SHOTS_INTERVAL);
@@ -73,7 +74,7 @@ public:
         float xRange = intervalLen - totalEnemiesWidth;
         float xRangeStart = randomFloat(xStart, xStart + xRange);
         float curXTranslation = xRangeStart - xStart;
-
+        
 
         for (int i = 0; i < nEnemies; i++) {
             Enemy* enemy = new Enemy(xRangeStart + SPAWN_OFFSET + i * (ENEMIES_WIDTH + ENEMIES_SPACING), Y_AXIS_SPAWN, ENEMIES_WIDTH, ENEMIES_HEIGHT, xRange);
@@ -91,6 +92,13 @@ public:
 
         int decrease = (int)(score / 100) * 1000;
         waveInterval = chrono::milliseconds(INITIAL_WAVE_INTERVAL - decrease);
+    }
+
+    void refreshMaxEnemiesPerWave(float score) {
+        if ( (int)score % 400 != 0) return;
+        if (maxEnemiesPerWave >= 10) return;
+
+        maxEnemiesPerWave = MIN_ENEMIES_PER_WAVE + (int)(score / 400);
     }
 
     void move(float speed, float deltaTime) {
