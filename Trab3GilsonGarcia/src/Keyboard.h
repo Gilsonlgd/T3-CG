@@ -20,13 +20,15 @@ using namespace std;
 
 /*
 ##### Teclado #####
-Implementa controle do teclado
+Implementa controle do teclado,
+util no controle do jogador, usando
+teclas simultaneas.
 ######################
 */
 
 class Keyboard {
     list<int> pressedKeys;
-    list<int> controlPressedKeys;
+    list<int> controlPressedKeys; // são as teclas de controle do jogador
     
 public:
     Keyboard() {}

@@ -13,6 +13,13 @@
 #define SHIELD_TIME 3000
 #define TIME_TO_READY 13000
 
+using namespace std;
+/*
+##### SHIELD #####
+Implementa o escudo do jogador.
+######################
+*/
+
 class Shield {
     vector<float> controlX;
     vector<float> controlY;
@@ -76,6 +83,7 @@ public:
         }
     }
 
+    // atualiza a posição do escudo de acordo com a posição do jogador
     void refreshPosition(float x, float y) {
         controlX[0] = x - spaceshipWidth/2 - radius;
         controlY[0] = y + spaceshipHeight/2;
@@ -87,6 +95,7 @@ public:
         controlY[2] = (y + spaceshipHeight/2);  
     }
 
+    // atualiza o tempo para o escudo ficar pronto
     void refreshTimeToReady() {
         if (ready) return;
 
@@ -102,6 +111,7 @@ public:
         }
     }
 
+    // ativa o escudo
     void activate() {
         if (ready) {
             isActive = true;
@@ -119,6 +129,7 @@ public:
         return timeToReady.count() / 1000;
     }
 
+    // verifica se o escudo colidiu com um tiro
     bool checkBulletCollision(Bullet* bullet){
         if (bullet->getBulletY() + bullet->getHeight() < controlY[1]) return false;
         if (bullet->getBulletX() + bullet->getWidth() < controlX[0]) return false;
@@ -133,6 +144,7 @@ public:
         return false;
     }
 
+    // verifica se o escudo colidiu com um inimigo
     bool checkEnemyCollision(Enemy* enemy) {
         float enemyHeight = enemy->getHeight();
         float enemyWidth = enemy->getWidth();

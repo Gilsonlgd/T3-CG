@@ -27,8 +27,8 @@ using namespace std;
 
 /*
 ##### ENEMIES CONTROLLER #####
-Implementa controle dos inimigos,
-como spawn, movimentação, colisão ]
+Implementa controle das ordas de inimigos,
+como spawn, movimentação, colisão
 e tiros.
 ##############################
 */
@@ -62,6 +62,7 @@ public:
         }
     }
 
+    //spawna a orda de inimigos
     void spawnEnemiesWave(float xStart, float xEnd, chrono::steady_clock::time_point currentTime) {
         float intervalLen = xEnd - xStart;
         int nEnemies = (int)(intervalLen / (ENEMIES_WIDTH + ENEMIES_SPACING));
@@ -86,6 +87,8 @@ public:
         }
     }
 
+    // atualiza o intervalo entre as ordas de inimigos de acordo com a pontuação atual
+    // a cada 100 pontos, diminui o intervalo em 1 segundo 
     void refreshSpawnInterval(float score) {
         if ( (int)score % 100 != 0) return;
         if (waveInterval <= chrono::milliseconds(MIN_SPAWN_INTERVAL)) return;
@@ -94,6 +97,8 @@ public:
         waveInterval = chrono::milliseconds(INITIAL_WAVE_INTERVAL - decrease);
     }
 
+    // atualiza o número máximo de inimigos por orda de acordo com a pontuação atual
+    // a cada 300 pontos, aumenta o número máximo de inimigos por orda em 1
     void refreshMaxEnemiesPerWave(float score) {
         if ( (int)score % 300 != 0) return;
         if (maxEnemiesPerWave >= 10) return;
@@ -143,6 +148,7 @@ public:
         return enemies;
     }
 
+    // controla o tiro dos inimigos
     void handleEnemiesShooting(float x, float y) {
         chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
         if (currentTime - lastShotTime > shotsInterval) {
@@ -153,6 +159,8 @@ public:
         }
     }
 
+    // atualiza o intervalo entre os tiros dos inimigos de acordo com a pontuação atual
+    // a cada 100 pontos, diminui o intervalo em 0.5 segundos
     void refreshShotsInterval(float score) {
         if ( (int)score % 100 != 0) return;
         if (shotsInterval <= chrono::milliseconds(MIN_SHOTS_INTERVAL)) return;

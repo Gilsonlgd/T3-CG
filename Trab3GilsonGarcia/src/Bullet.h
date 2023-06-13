@@ -20,8 +20,8 @@ class Bullet : public Rectangle {
     float speed;
     float speed_up;
     bool isFired;
-    float yDirection;
-    float xDirection;
+    float yDirection; // direção y na qual a bala se move
+    float xDirection; // direção x na qual a bala se move
 
 
 public: 
@@ -47,6 +47,8 @@ public:
     void move(float deltaTime) {
         translateBy(speed * xDirection * deltaTime, speed * yDirection * deltaTime);
     }
+
+    // utlizado para setar a posição da bala no momento do tiro
     void fireBullet(float x, float y) {
         float offsetX = width/2;
         translateTo(x - offsetX, y);

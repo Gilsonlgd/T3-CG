@@ -33,6 +33,7 @@ protected:
     int indexColor;
     int colorScale;
 
+    // translada de acordo com um valor
     virtual void translateBy(float xIncrease, float yIncrease) {
         // Criando a matriz de translação
         vector<vector<float>> translationMatrix = {
@@ -59,6 +60,7 @@ protected:
         }
     }
 
+    // translada para o ponto
     virtual void translateTo(float x, float y) {
         // Calculating the translation offsets
         float offsetX = x - vx[0];
@@ -149,7 +151,7 @@ public:
         return visible;
     }
 
-    // Algorimo Ray Casting de detecção de colisão.
+    // Algorimo Ray Casting de detecção de colisão entre polígono e ponto
     virtual bool hasPointCollided(int x, int y) {
         int n = nPoints;
         int count = 0;
@@ -167,7 +169,7 @@ public:
         return count % 2 == 1;
     }
 
-    // Algoritmo SAT de detecção de colisão
+    // Algoritmo SAT de detecção de colisão entre polígonos
      bool hasPolygonCollided(const vector<float>& vx1, const vector<float>& vy1) {
         vector<float> combinedVx = vx;
         vector<float> combinedVy = vy;

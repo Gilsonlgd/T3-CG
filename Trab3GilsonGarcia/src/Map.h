@@ -41,11 +41,15 @@ class Map {
 
     vector<float> bSplineY;
 
-    vector<Point*> playerCollisionBitMapL;
+    // guardo um bitmap de colisão para cada curva
+    // no intervalo da nave do jogador para melhor performance.
+    vector<Point*> playerCollisionBitMapL; 
     vector<Point*> playerCollisionBitMapR;
     float playerCollisionIntervalStart;
     float playerCollisionIntervalEnd;
 
+    // guardo um bitmap de colisão para cada curva
+    // no intervalo dos inimigos para melhor performance.
     vector<Point*> enemiesCollisionBitMapL;
     vector<Point*> enemiesCollisionBitMapR;
     float enemiesCollisionIntervalStart;
@@ -90,6 +94,8 @@ class Map {
         *y = randomFloat(minHeight, 0);
     }
 
+    // gera os pontos de controle iniciais das curvas.
+    // y incrementado de 250 em 250. x aleatório.
     void seedControlPoints() {
         random_device rd;
         mt19937 rng(rd());
@@ -219,6 +225,7 @@ public:
         }
     }
 
+    // seta os intervalos de colisão para armazenar os bitmaps de colisão
     void setPlayerCollisionInterval(float y1, float y2) {
         playerCollisionIntervalStart = y1;
         playerCollisionIntervalEnd = y2;
@@ -252,6 +259,8 @@ public:
         return false;
     }
 
+    // retorna o ponto do intervalo mais próximo das naves
+    // dos inimigos. usado para definir a posição de spawn 
     float getEnemiesIntervalMinX() {
         float maxX = -1000000;
         for (int i = 0; i < enemiesCollisionBitMapL.size(); i++) {

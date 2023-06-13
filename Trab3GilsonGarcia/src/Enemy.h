@@ -40,8 +40,8 @@ class Enemy : public Polygon{
     float gBullet;
     float bBullet;
 
-    float maxXrange;
-    float curXTranslation;
+    float maxXrange; // limita o movimento x do inimigo
+    float curXTranslation; // usado para controlar o movimento x do inimigo
     float bulletSpeed;
 
     list<Bullet*> firedBullets;
@@ -211,6 +211,7 @@ public:
         translateBy(xSpeed * xDirection * deltaTime, ySpeed * deltaTime);
     }
 
+    // confere se um bala coliidiu com o inimigo
     bool checkBulletCollision(Bullet* bullet) {
         if (bullet->getBulletY() > vy[0] + height) {
             return false;
@@ -227,6 +228,7 @@ public:
         return hasPolygonCollided(bullet->getVx(), bullet->getVy());
     }
 
+    // implementa o tiro para baixo
     void shot() {
         if (alive) {
             Bullet* bullet = new Bullet(5, 10, ySpeed + bulletSpeed);
@@ -237,6 +239,7 @@ public:
         }
     }
 
+    // implementa o tiro em direção ao ponto (x, y)
     void shotTo(float x, float y) {
         if (alive) {
             Math_Vector* v1 = new Math_Vector();

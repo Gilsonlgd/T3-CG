@@ -76,7 +76,7 @@ void printPlayerLifes() {
    CV::rect(20, 20, 200, 60);
 }
 
-void printPlayerShieldCounter() {
+void printPlayerShieldTimer() {
    int timeToReady = spaceship->getShieldTimeToReady();
    string shieldCounterText;
 
@@ -85,7 +85,7 @@ void printPlayerShieldCounter() {
    } else {
       shieldCounterText = "Escudo: " + to_string(timeToReady) + "s";
    }
-   
+
    CV::color(1, 1, 1);
    CV::text(40, 80, shieldCounterText.c_str());
    CV::rect(20, 60, 200, 100);
@@ -138,6 +138,7 @@ void handleEnemiesShotsCollision() {
    }
 }
 
+// trata a colisão entre jogador e inimigos
 void handleEnemiesPlayerCollision() {
    list<Enemy*> enemies = enemiesController->getEnemies();
 
@@ -165,6 +166,7 @@ void handleEnemiesPlayerCollision() {
    }
 }
 
+// trata a colisão entre player e mapa
 void handlePlayerMapCollision() {   
    if (map->checkSpaceshipCollision(spaceship)) {
       if (!spaceship->isInvulnerable()) {
@@ -211,7 +213,7 @@ void handleRunningGame() {
    printScore();
    printPlayerLifes();
    printFrameRate();
-   printPlayerShieldCounter();
+   printPlayerShieldTimer();
 }
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais
@@ -235,6 +237,7 @@ void render()
    deltaTime = fpsControl->getDeltaTime();
 }
 
+// trata o movimento do jogador
 void handleStarshipMovement() {
    if (kbd->isControlKeyPressed()) {
       int direction = kbd->getControlKeyPressed();
@@ -303,7 +306,7 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 int main(void)
 {
    kbd = new Keyboard();
-   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 5, 3);
+   spaceship = new Spaceship((float)screenWidth / 2, screenHeight - 100, 35, 70, 6, 3);
    map = new Map(screenWidth, screenHeight);
    homeScreen = new HomeScreen(screenWidth, screenHeight, "Spaceship Wars");
    endScreen = new EndScreen(screenWidth, screenHeight, "Game Over");

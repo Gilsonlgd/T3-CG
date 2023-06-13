@@ -31,6 +31,7 @@ public:
         frameDelay = chrono::milliseconds(1000 / maxFrameRate);
     }
 
+    // limita o FPS maximo
     void limitRefreshRate() {
         presentTime = chrono::steady_clock::now();
         chrono::milliseconds elapsedTime = chrono::duration_cast<chrono::milliseconds>(presentTime - priorTime);
@@ -59,6 +60,8 @@ public:
         return actualFrameRate;
     }
 
+    // retorna o deltaTime, valor usado para calcular a velocidade dos objetos
+    // em relação ao fps
     float getDeltaTime() {
         return (float)deltaTime.count() / 16.0f;
     }

@@ -42,12 +42,14 @@ float randomFloat(float min, float max);
 
 float dist(float x1, float y1, float x2, float y2);
 
+// angulo em graus entre dois vetores
 float angleDEG(float x1, float y1, float x2, float y2);
 
 void rotatePoint(float& x1, float& y1, float pivotX, float pivotY, float angle);
 
 void rotatePoints(float* vx, float* vy, int nPoints, float pivotX, float pivotY, float angle);
 
+// calcula o módulo de um vetor
 float calculateMagnitude(float x, float y);
 
 #endif  // MATH_UTILS_H

@@ -16,7 +16,7 @@ using namespace std;
 #define SPACESHIP_COLOR 233.0/265, 15.0/265, 213.0/265
 
 /*
-##### Teclado #####
+##### Spaceship #####
 Implementa a nave do jogador.
 ######################
 */
@@ -164,6 +164,7 @@ public:
         }
     }
 
+    // usado para evitar delay do teclado
     void startMove(int direction) {
         switch (direction) {
             case DOWN:
@@ -289,7 +290,7 @@ public:
     int getShieldTimeToReady() {
         return shield->getTimeToReady();
     }
-    
+
 
     float getHeight() {
         return height;
