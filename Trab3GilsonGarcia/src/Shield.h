@@ -5,12 +5,13 @@
 #include "bullet.h"
 #include "math_utils.h"
 #include "Enemy.h"
+#include <stdio.h>
 #include <vector>
 #include <chrono>
 
 #define SHIELD_COLOR 0.0, 0.0, 1.0
 #define SHIELD_TIME 3000
-#define TIME_TO_READY 10000
+#define TIME_TO_READY 13000
 
 class Shield {
     vector<float> controlX;
@@ -20,8 +21,8 @@ class Shield {
     vector<float> vy;
 
     bool isActive;
+    bool ready;
     chrono::steady_clock::time_point lastActivationTime;
-    chrono::steady_clock::time_point lastDeactivationTime;
     chrono::steady_clock::time_point lastTimeCapture;
     chrono::milliseconds timeToReady;
 
@@ -30,7 +31,6 @@ class Shield {
     float radius;
 
 public:
-
     Shield(float x, float y, float spaceshipWidth, float spaceshipHeight, float radius) {
         controlX.push_back(x - spaceshipWidth/2 - radius);
         controlY.push_back(y + spaceshipHeight/2);
@@ -45,6 +45,9 @@ public:
         this->spaceshipWidth = spaceshipWidth;
         this->radius = radius;
         isActive = false;
+        ready = true;
+        timeToReady = chrono::milliseconds(0);
+        lastTimeCapture = chrono::steady_clock::now();
     }
 
     void render() {
@@ -69,24 +72,8 @@ public:
 
             if (elapsedTime.count() > SHIELD_TIME) {
                 isActive = false;
-                lastDeactivationTime = currentTime;
-                timeToReady = chrono::milliseconds(10000);
             }  
-        } else {
-            if (timeToReady.count() > 0) {
-                chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
-                chrono::milliseconds = elapsedTimeBetweenTimeCapture = chrono::duration_cast<chrono::milliseconds>(currentTime - lastTimeCapture);
-
-                if (elapsedTimeBetweenTimeCapture.count() >= 1000) {
-                    timeToReady -= elapsedTimeBetweenTimeCapture;
-                    lastTimeCapture = currentTime;
-                }
-            } else {
-                timeToReady = chrono::milliseconds(0);
-            }
-        } 
-
-
+        }
     }
 
     void refreshPosition(float x, float y) {
@@ -100,13 +87,36 @@ public:
         controlY[2] = (y + spaceshipHeight/2);  
     }
 
+    void refreshTimeToReady() {
+        if (ready) return;
+
+        chrono::steady_clock::time_point currentTime = chrono::steady_clock::now();
+        chrono::milliseconds elapsedTime = chrono::duration_cast<chrono::milliseconds>(currentTime - lastActivationTime);
+
+        if (elapsedTime.count() >= TIME_TO_READY) {
+            timeToReady = chrono::milliseconds(0);
+            ready = true;
+        } else if (currentTime - lastTimeCapture > chrono::milliseconds(1000)) {
+            timeToReady = chrono::milliseconds(timeToReady.count() - 1000);
+            lastTimeCapture = currentTime;
+        }
+    }
+
     void activate() {
-        isActive = true;
-        lastActivationTime = chrono::steady_clock::now();
+        if (ready) {
+            isActive = true;
+            lastActivationTime = chrono::steady_clock::now();
+            timeToReady = chrono::milliseconds(TIME_TO_READY);
+            ready = false;
+        }   
     }
 
     bool isActiveShield() {
         return isActive;
+    }
+
+    int getTimeToReady() {
+        return timeToReady.count() / 1000;
     }
 
     bool checkBulletCollision(Bullet* bullet){

@@ -76,6 +76,21 @@ void printPlayerLifes() {
    CV::rect(20, 20, 200, 60);
 }
 
+void printPlayerShieldCounter() {
+   int timeToReady = spaceship->getShieldTimeToReady();
+   string shieldCounterText;
+
+   if (timeToReady == 0) {
+      shieldCounterText = "Escudo: pronto";
+   } else {
+      shieldCounterText = "Escudo: " + to_string(timeToReady) + "s";
+   }
+   
+   CV::color(1, 1, 1);
+   CV::text(40, 80, shieldCounterText.c_str());
+   CV::rect(20, 60, 200, 100);
+}
+
 void handleMapMovement() {
    map->move(spaceship->getSpeed() * deltaTime);
    enemiesController->move(spaceship->getSpeed(), deltaTime);
@@ -196,6 +211,7 @@ void handleRunningGame() {
    printScore();
    printPlayerLifes();
    printFrameRate();
+   printPlayerShieldCounter();
 }
 
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis globais

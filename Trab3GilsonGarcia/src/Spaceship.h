@@ -127,6 +127,7 @@ public:
 
     virtual void render() override {
         renderBullets();
+        shield->refreshTimeToReady();
         shield->render();
 
         CV::translate(0, 0);
@@ -136,7 +137,6 @@ public:
         else if (colorScale == INDEX14)  CV::color(indexColor);
 
         CV::polygonFill(vx.data(), vy.data(), nPoints);
-
     }
 
     void move(float deltaTime) {
@@ -285,6 +285,11 @@ public:
     bool isShieldActive() {
         return shield->isActiveShield();
     }
+
+    int getShieldTimeToReady() {
+        return shield->getTimeToReady();
+    }
+    
 
     float getHeight() {
         return height;
