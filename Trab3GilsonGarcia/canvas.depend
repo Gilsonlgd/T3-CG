@@ -1,62 +1,4 @@
 # depslib dependency file v1.0
-1626955631 source:e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\gl_canvas2d.cpp
-	"gl_canvas2d.h"
-	<GL/glut.h>
-
-1603974868 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\gl_canvas2d.h
-	<stdio.h>
-	<stdlib.h>
-	<math.h>
-	<string.h>
-	<GL/glut.h>
-	<GL/freeglut_ext.h>
-	"Vector2.h"
-
-1426372440 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\include\gl\glut.h
-	"freeglut_std.h"
-
-1437579942 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\include\gl\freeglut_std.h
-	<windows.h>
-	<EGL/egl.h>
-	<GLES/gl.h>
-	<GLES2/gl2.h>
-	<OpenGL/gl.h>
-	<OpenGL/glu.h>
-	<GL/gl.h>
-	<GL/glu.h>
-	<stdlib.h>
-
-1426372440 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\include\gl\freeglut_ext.h
-	<stdarg.h>
-
-1589217858 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\vector2.h
-
-1603975055 source:e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\main.cpp
-	<GL/glut.h>
-	<GL/freeglut_ext.h>
-	<math.h>
-	<stdio.h>
-	<stdlib.h>
-	"gl_canvas2d.h"
-	"Bola.h"
-	"Relogio.h"
-	"Botao.h"
-
-1589214882 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\bola.h
-	"gl_canvas2d.h"
-
-1193164156 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\relogio.h
-	"gl_canvas2d.h"
-
-1589214891 e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\botao.h
-	"gl_canvas2d.h"
-
-1589218349 source:e:\pastas\ufsm copia\5 semestre\cg\material\demos\gl_1_canvasglut\src\relogio.cpp
-	"Relogio.h"
-	<math.h>
-	<stdio.h>
-	<stdlib.h>
-
 1684795212 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\gl_canvas2d.cpp
 	"gl_canvas2d.h"
 	<GL/glut.h>
@@ -148,6 +90,29 @@
 	"Polygon.h"
 	"constants.h"
 
+1686698641 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\enemy.h
+	<list>
+	"stdio.h"
+	"Polygon.h"
+	"Keyboard.h"
+	"Bullet.h"
+
+1686699475 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\shield.h
+	"gl_canvas2d.h"
+	"bullet.h"
+	"math_utils.h"
+	"Enemy.h"
+	<stdio.h>
+	<vector>
+	<chrono>
+
+1686698462 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\enemiescontroller.h
+	<list>
+	"stdio.h"
+	"Enemy.h"
+	<chrono>
+	<thread>
+
 1686699271 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
 	<stdio.h>
 	<vector>
@@ -157,170 +122,6 @@
 	"math_utils.h"
 	<ctime>
 	"Spaceship.h"
-
-1686698693 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\fpscontrol.h
-	<iostream>
-	<chrono>
-	<thread>
-
-1686694858 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.cpp
-	"math_utils.h"
-
-1684990956 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\gl_canvas2d.cpp
-	"gl_canvas2d.h"
-	<GL/glut.h>
-
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\gl_canvas2d.h
-	<stdio.h>
-	<stdlib.h>
-	<math.h>
-	<string.h>
-	<GL/glut.h>
-	<GL/freeglut_ext.h>
-	"Vector2.h"
-
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\include\gl\glut.h
-	"freeglut_std.h"
-
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\include\gl\freeglut_std.h
-	<windows.h>
-	<EGL/egl.h>
-	<GLES/gl.h>
-	<GLES2/gl2.h>
-	<OpenGL/gl.h>
-	<OpenGL/glu.h>
-	<GL/gl.h>
-	<GL/glu.h>
-	<stdlib.h>
-
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\include\gl\freeglut_ext.h
-	<stdarg.h>
-
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\vector2.h
-
-1686683497 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\main.cpp
-	<GL/glut.h>
-	<GL/freeglut_ext.h>
-	<math.h>
-	<stdlib.h>
-	<iostream>
-	<list>
-	<chrono>
-	<random>
-	<string>
-	"gl_canvas2d.h"
-	"Keyboard.h"
-	"Spaceship.h"
-	"Polygon.h"
-	"EnemiesController.h"
-	"Map.h"
-	"HomeScreen.h"
-	"EndScreen.h"
-	"FPSControl.h"
-	"constants.h"
-
-1684990956 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\keyboard.h
-	<list>
-	<algorithm>
-
-1686686006 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\spaceship.h
-	<list>
-	<chrono>
-	"Polygon.h"
-	"Keyboard.h"
-	"Bullet.h"
-	"Enemy.h"
-	"Shield.h"
-
-1686492832 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\polygon.h
-	<vector>
-	<cmath>
-	<iostream>
-	<cfloat>
-	"constants.h"
-	"math_utils.h"
-	"gl_canvas2d.h"
-
-1686492654 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\constants.h
-
-1686682441 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.h
-	<vector>
-	<math.h>
-	<random>
-	<ctime>
-	"constants.h"
-
-1686491841 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\bullet.h
-	"Rectangle.h"
-
-1686492576 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\rectangle.h
-	"Polygon.h"
-	"constants.h"
-
-1686492250 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\map.h
-	<stdio.h>
-	<vector>
-	<random>
-	<algorithm>
-	"gl_canvas2d.h"
-	"math_utils.h"
-	<ctime>
-	"Spaceship.h"
-
-1686686522 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\fpscontrol.h
-	<iostream>
-	<chrono>
-	<thread>
-
-1686679530 source:c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\math_utils.cpp
-	"math_utils.h"
-
-1686492174 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\homescreen.h
-	<stdio.h>
-	<list>
-	"gl_canvas2d.h"
-	"math_utils.h"
-	"Botao.h"
-
-1686081204 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\botao.h
-	"gl_canvas2d.h"
-	"constants.h"
-
-1686675419 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemy.h
-	<list>
-	"stdio.h"
-	"Polygon.h"
-	"Keyboard.h"
-	"Bullet.h"
-
-1686686165 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\enemiescontroller.h
-	<list>
-	"stdio.h"
-	"Enemy.h"
-	<chrono>
-	<thread>
-
-1686491883 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\endscreen.h
-	<stdio.h>
-	<list>
-	"gl_canvas2d.h"
-	"math_utils.h"
-	"Botao.h"
-	<string>
-
-1686698641 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\enemy.h
-	<list>
-	"stdio.h"
-	"Polygon.h"
-	"Keyboard.h"
-	"Bullet.h"
-
-1686698462 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\enemiescontroller.h
-	<list>
-	"stdio.h"
-	"Enemy.h"
-	<chrono>
-	<thread>
 
 1686524432 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\homescreen.h
 	<stdio.h>
@@ -341,20 +142,11 @@
 	"Botao.h"
 	<string>
 
-1686686829 c:\users\garci\desktop\t3-cg\trab3gilsongarcia\src\shield.h
-	"gl_canvas2d.h"
-	"bullet.h"
-	"math_utils.h"
-	"Enemy.h"
-	<vector>
+1686698693 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\fpscontrol.h
+	<iostream>
 	<chrono>
+	<thread>
 
-1686699475 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\shield.h
-	"gl_canvas2d.h"
-	"bullet.h"
+1686694858 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\math_utils.cpp
 	"math_utils.h"
-	"Enemy.h"
-	<stdio.h>
-	<vector>
-	<chrono>
 

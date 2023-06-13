@@ -2,7 +2,7 @@
 // Canvas para desenho, criada sobre a API OpenGL. Nao eh necessario conhecimentos de OpenGL para usar.
 //  Autor: Gilson Garcia
 //         06/2023
-//
+// Todos os detalhes, instruções e descrição de extras estão no README.txt
 // *********************************************************************/
 
 #include <GL/glut.h>
