@@ -22,7 +22,7 @@ Faça o máximo de pontos que conseguir!
 	- Tiros dos inimigos são direcionados ao jogador;
 	- Aparência visual (timer, controlador de vidas, estrelas de fundo, telas inicial e final).
 
-	
+
 ###### Intruções: ######
 - Movimentação:
 	Sua nave está fixa à borda inferior da tela e você só pode controlar sua movimentação para a esquerda e para a direita,
@@ -63,6 +63,7 @@ e a velocidade na qual avança pelo mapa.
 - Pontuação:
 	Você só pontua eliminando inimigos. 
 	Para cada inimigo eliminado você ganha 10 pontos.
+	Eliminar inimigos com seu escudo não aumenta seu score.
 
 - Progresso e dificuldade (EXTRA):
 	Ao acumular pontos, o jogo se torna progressivamente mais difícil.
