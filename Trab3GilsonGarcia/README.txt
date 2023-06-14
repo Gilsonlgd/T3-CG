@@ -1,47 +1,76 @@
 Trabalho de Gilson Garcia.
 
-Este é um editor de formas geométricas que permite criar imagens com retas, retângulos e círculos.
-Abre o arquivo figuras.gr sempre que inicializa o aplicativo.
+Este é um jogo de tiro entre naves espaciais.
+Sua nave é limitada pelas curvas à sua direita e sua esquerda.
+Faça o máximo de pontos que conseguir!
 
+###### Funcionalidades: ######
+	Todos os requisitos mínimos foram implementados:
+	- Desenho de um cenário com pelo menos 10x a altura da window -> é gerado proceduralmente;
+	- As curvas devem ser desenhadas com Bezier ou B-spline -> B-spline nas paredes e Bezier no escudo
+	- A nave deve poder disparar contra os inimigos e vice-versa;
+	- Deve ter um placar de pontuação;
+	- A geometria da nave pode ser bem simples, como uma seta. A geometria dos inimigos;
+	pode ser círculos, quadrados, etc;
+	- Controle de FPS -> limitado a 60 fps. A movimentação no jogo é calculada e multiplicada por um deltaTime, dado pelo controlador de FPS.
+
+	Requisitos Extra:
+	- Poder especial -> escudo;
+	- Aumento progressivo da dificuldade com base na pontuação;
+	- Controle de vidas do player;
+	- Período invencível ao perder vida;
+	- Tiros dos inimigos são direcionados ao jogador;
+	- Aparência visual (timer, controlador de vidas, estrelas de fundo, telas inicial e final).
+
+	
 ###### Intruções: ######
-- Para criar uma figura:
-	- Na Toolbar clique no botão da figura de seu desejo e clique no local onde quer posicioná-la. Ela será iniciada com um tamanho padronizado.
+- Movimentação:
+	Sua nave está fixa à borda inferior da tela e você só pode controlar sua movimentação para a esquerda e para a direita,
+e a velocidade na qual avança pelo mapa.
+	- Setas <- e -> transladam no eixo x
+	- Setas cima e baixo aumentam e diminuem sua velocidade respectivamente.
 
-- Para selecionar figuras:
-	- Clique nela! (Isso também trará ela para a frente de todas as outras).
-	- Caso queria selecionar várias figuras, segure CTRL.
-	- Para des-selecionar figuras você pode: clicar em outra figura sem pressionar CTRL, clicar fora de uma figura ou apertar ESC. 
+- Tiro:
+	Você pode atirar ilimitadamente. Seus tiros seguem em linha reta até encontrar um inimigo.
+	- Utilize SPAÇO para atirar
 
-- Para redimensionar figuras:
-Ao selecionar uma figura, botões redondos aparecem aos seu redor. Ao clicar e arrastar esses pontos é possível redimensionar as figuras.
-	- Nas linhas é possível mudar seu ponto inicial e final
-	- Nos retângulos é possível mudar a posição de suas arestas. Só é possível mudar na direção da das arestas perpendiculares à selecionada (para manter a forma).
-	- Nos círculos é possível aumentar o raio.
+- Inimigos:
+	São spawnados em ordas, de acordo com a dificuldade atual do jogo.
+	Aparecem de acordo com um intervalo de tempo.
+	Atiram de acordo com um intervalo de tempo.
+	Inimigos atiram na sua direção se você estiver no campo de alcance deles, então esteja pronto para desviar. (EXTRA)
 
-Ao segurar SHIFT e arrastar um dos botões de redimensionamento, a figura é redimensionada proporcionalmente (no caso do círculo sempre é).
-	- Nas linhas, o ponto oposto ao que se está arrastando é movimentado na mesma proporção.
-	- Nos retângulos, a aresta perpendicular à selecionada é movimentada na mesma proporção. 
-	- Só é possível redimensionar uma figura por vez.
+- Vidas (EXTRA):
+	Você tem um número máximo de vidas durante o jogo. Seu número inicial de vidas é 5.
+	Ao perder uma vida, você muda de cor e fica invencível por 3 segundos, não podendo sofrer dano durante esse período.
 
-- Para rotacionar figuras
-Ao selecionar uma figura figura, fora dela à sua direita há um botão como o de redimensionamento.
-	- Arraste esse botão e você rotacionará a figura.
-	- Só é possível rotacionar uma figura por vez.
+	Você perde vidas se:
+	- Encostar em uma das curvas delimitadoras.
+	- Colidir com o tiro de um inimigo.
+	- Colidir com um inimigo.
 
-- Para arrastar figuras:
-	- Selecione e arraste!
-	- Caso queira arrastar várias, selecione várias e segurando CTRL arraste.
+	Ao chegar em 0 vidas, você perde o jogo.
 
-- Para pintar figuras:
-	- Na toolbar selecione a cor desejada. Isso fará com que o ponteiro do mouse se torne um "pincel". Clicando em qualquer figura, ela terá a cor desejada.
-	- Você pode pintar várias! Selecione as figuras que quer pintar. Segurando CTRL selecione a cor, e clique em alguma das figuras selecionadas.
-	- Ao utilizar a ferramenta de "pincel" você não consegue arrastar, redimensionar ou rotacionar figuras. 
-	- Para voltar ao ponteiro do mouse normal você pode: selecionar para criar uma nova figura ou apertar ESC. 
+- Proteção (EXTRA):
+	Existe um poder especial! Você pode usar um escudo para evitar danos de tiros e de colisão com outras naves.
+	
+	Para usar o escudo:
+	- Pressione a tecla CTRL.
 
-- Para excluir figuras:
-	- Selecione as figuras que quer apagar e aperte DEL (ou DELETE) dependendo do seu teclado.
-	- Na Toolbar você pode também clicar no botão "Excluir Tudo" para excluir todas as figuras criadas.
+	O escudo ficará ativo por 3 segundos.
+	O escudo tem um tempo de recarga de 13 segundos, use com cuidado.
 
-- Para salvar o arquivo:
-	- Na Toolbar, clique no botão "Salvar Arquivo"
+- Pontuação:
+	Você só pontua eliminando inimigos. 
+	Para cada inimigo eliminado você ganha 10 pontos.
+
+- Progresso e dificuldade (EXTRA):
+	Ao acumular pontos, o jogo se torna progressivamente mais difícil.
+
+	O que fica mais difícil:
+	- A cada 100 pontos diminui o intervalo entre as ordas de inimigos em 1 segundo, até um mínimo de 3 segundos.
+	- A cada 100 pontos diminui o intervalo entre os tiros dos inimigos em 0.5 segundo, até um mínimo de 1 segundo.
+	- A cada 300 pontos aumenta o número máximo de inimigos por orda em 1 até um máximo de 10 inimigos.
+
+
  
