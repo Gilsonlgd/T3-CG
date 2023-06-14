@@ -22,6 +22,13 @@ Faça o máximo de pontos que conseguir!
 	- Tiros dos inimigos são direcionados ao jogador;
 	- Aparência visual (timer, controlador de vidas, estrelas de fundo, telas inicial e final).
 
+Obs.: Acontece um problema quando se move ou redimensiona a janela durante o jogo.
+	  Isso acontece porque o calculo do deltaTime é baseado no tempo entre um frame e outro.
+	  Quando há redimensionamento da janela, o render é parado, e quando retorna, o deltaTime é muito grande.
+	  Isso faz com que vários pontos de controle saiam da tela ao mesmo tempo, e sejam jogados para o início juntos, deformando as curvas.
+	  Não encontrei uma forma de implementar o controle de FPS e evitar este problema.
+	  Basta rodar o jogo de novo e evitar de redimensionar ou mover a janela durante o jogo. 
+
 
 ###### Intruções: ######
 - Movimentação:
