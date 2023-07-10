@@ -211,7 +211,14 @@ public:
 
         float *prevLastY = &bSplineY[bSplineY.size() - 5];
         if (*prevLastY > baseHeight + 200) {
-            bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = -550;
+            if (bSplineY[0] <= 0) {
+                bSplineY[BSPLINE_N_CONTROL_POINTS - 1] = bSplineY[0] - 250;
+            } else {
+                bSplineY[0] = -250;
+                for (int i = 1; i < BSPLINE_N_CONTROL_POINTS - 1; i++) {
+                    bSplineY[i] = bSplineY[i - 1] + 250;
+                }
+            }
             sort(bSplineY.begin(), bSplineY.end());
 
             float xLeft = randomFloat(0, BSPLINE_X_RANGE);

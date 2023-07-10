@@ -31,7 +31,7 @@
 
 1684795212 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\vector2.h
 
-1686700608 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
+1686711452 source:c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\main.cpp
 	<GL/glut.h>
 	<GL/freeglut_ext.h>
 	<math.h>
@@ -113,7 +113,7 @@
 	<chrono>
 	<thread>
 
-1686707586 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
+1686711371 c:\users\pichau\desktop\trabalhos\cg-t3\trab3gilsongarcia\src\map.h
 	<stdio.h>
 	<vector>
 	<random>
